@@ -968,6 +968,29 @@ p { margin-bottom: 1.25rem; }
 <li><a href="#_ansible_playbook">13.5. ansible-playbook</a></li>
 </ul>
 </li>
+<li><a href="#_Elasticserch_chapter">14. Elasticsearch</a>
+<ul class="sectlevel2">
+<li><a href="#_elasticsearch">14.1. <code>Elasticsearch</code></a>
+<ul class="sectlevel3">
+<li><a href="#_基础使用">14.1.1. 基础使用</a></li>
+<li><a href="#_请求体查询">14.1.2. 请求体查询</a></li>
+<li><a href="#_结构化查询">14.1.3. 结构化查询</a></li>
+<li><a href="#_查询与过滤">14.1.4. 查询与过滤</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_MongoDB_chapter">15. MongoDB</a>
+<ul class="sectlevel2">
+<li><a href="#_mongodb">15.1. <code>MongoDB</code></a>
+<ul class="sectlevel3">
+<li><a href="#_安装_4">15.1.1. 安装</a></li>
+<li><a href="#_基本操作">15.1.2. 基本操作</a></li>
+<li><a href="#_条件查询">15.1.3. 条件查询</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -1886,7 +1909,7 @@ hostnamectl set-hostname 主机名
 echo SELINUX=disabled&gt;/etc/selinux/config
 echo SELINUXTYPE=targeted&gt;&gt;/etc/selinux/config
 
-#临时关闭，不需要重启
+#临时关闭SElinux，不需要重启
 setenforce 0
 
 #如果你想使用自己的 iptables 静态防火墙规则, 那么请安装 iptables-services 并且禁用 firewalld ，启用 iptables
@@ -3923,11 +3946,11 @@ rm -rf /usr/local/python-3.8.1
 mv python-3.8.1 /usr/local/python-3.8.1
 
 ln -s /usr/local/python-3.8.1 /usr/local/python3
-ln -s /usr/local/python3/bin/pip3 /usr/local/bin/pip38
-ln -s /usr/local/python3/bin/python3 /usr/local/bin/python38
+ln -s /usr/local/python3/bin/pip3 /usr/local/bin/pip3
+ln -s /usr/local/python3/bin/python3 /usr/local/bin/python3
 
-pip38 install --upgrade -i https://pypi.tuna.tsinghua.edu.cn/simple pip
-pip38 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</code></pre>
+pip3 install --upgrade -i https://pypi.tuna.tsinghua.edu.cn/simple pip
+pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</code></pre>
 </div>
 </div>
 </div>
@@ -3946,11 +3969,11 @@ rm -rf /usr/local/python-3.8.1
 mv python-3.8.1 /usr/local/python-3.8.1
 
 ln -s /usr/local/python-3.8.1 /usr/local/python3
-ln -s /usr/local/python3/bin/pip3 /usr/local/bin/pip38
-ln -s /usr/local/python3/bin/python3 /usr/local/bin/python38
+ln -s /usr/local/python3/bin/pip3 /usr/local/bin/pip3
+ln -s /usr/local/python3/bin/python3 /usr/local/bin/python3
 
-pip38 install --upgrade -i https://pypi.tuna.tsinghua.edu.cn/simple pip
-pip38 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</code></pre>
+pip3 install --upgrade -i https://pypi.tuna.tsinghua.edu.cn/simple pip
+pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</code></pre>
 </div>
 </div>
 <div style="page-break-after: always;"></div>
@@ -4293,6 +4316,25 @@ username/ubuntu</code></pre>
 <div class="title">查看数据卷的信息</div>
 <p><code>docker volume inspect first</code></p>
 </div>
+<div class="listingblock">
+<div class="title">启动一个挂载数据卷的容器</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">docker run -d -P \
+    --name web \
+    # -v my-vol:/usr/share/nginx/html \
+    --mount source=my-vol,target=/usr/share/nginx/html \
+    nginx:alpine</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="title">删除数据卷</div>
+<p><code>docker volume rm my-vol</code></p>
+</div>
+<div class="paragraph">
+<div class="title">清理数据卷</div>
+<p>无主的数据卷可能会占据很多空间
+<code>docker volume prune</code></p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_外部访问容器">12.1.6. 外部访问容器</h4>
@@ -4445,13 +4487,456 @@ PLAY RECAP ****************************************************
 </div>
 </div>
 <div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>include::book/14-Command</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_Elasticserch_chapter">14. Elasticsearch</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_elasticsearch">14.1. <code>Elasticsearch</code></h3>
+<div class="sect3">
+<h4 id="_基础使用">14.1.1. 基础使用</h4>
+<div class="paragraph">
+<div class="title">测试</div>
+<p><code>curl 'http://localhost:9200/?pretty'</code></p>
+</div>
+<div class="listingblock">
+<div class="title">健康检查</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">[root@elk1 ~]# curl 'localhost:9200/_cluster/health?pretty'
+{
+  "cluster_name" : "master-node",
+  "status" : "green",
+  "timed_out" : false,
+  "number_of_nodes" : 3,
+  "number_of_data_nodes" : 2,
+  "active_primary_shards" : 26,
+  "active_shards" : 52,
+  "relocating_shards" : 0,
+  "initializing_shards" : 0,
+  "unassigned_shards" : 0,
+  "delayed_unassigned_shards" : 0,
+  "number_of_pending_tasks" : 0,
+  "number_of_in_flight_fetch" : 0,
+  "task_max_waiting_in_queue_millis" : 0,
+  "active_shards_percent_as_number" : 100.0
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="title">查看详细信息</div>
+<p><code>curl 'localhost:9200/_cluster/state?pretty'</code></p>
+</div>
+<div class="paragraph">
+<div class="title">检索文档是否存在</div>
+<p><code>curl -i -XHEAD <a href="http://localhost:9200/test/test1/123" class="bare">http://localhost:9200/test/test1/123</a></code></p>
+</div>
+<div class="listingblock">
+<div class="title">空查询</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="text" class="language-text hljs">[root@elk1 ~]# curl GET 'localhost:9200/_search?pretty'
+curl: (6) Could not resolve host: GET; Unknown error
+{
+  "took" : 9,           #请求花费的毫秒数
+  "timed_out" : false,
+  "_shards" : {         #参与查询的分片数（ total 字段），多少成功，多少失败
+    "total" : 26,
+    "successful" : 26,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : 58145,    # 文档总数
+    "max_score" : 1.0,
+    "hits" : [
+        ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="title">在所有索引的所有类型中搜索</div>
+<p><code>curl GET 'localhost:9200/_search</code></p>
+</div>
+<div class="paragraph">
+<div class="title">在索引 gb 的所有类型中搜索</div>
+<p><code>curl GET 'localhost:9200/gb/_search</code></p>
+</div>
+<div class="paragraph">
+<div class="title">在索引 gb 和 us 的所有类型中搜索</div>
+<p><code>curl GET 'localhost:9200/gb,us/_search</code></p>
+</div>
+<div class="paragraph">
+<div class="title">在以 g 或 u 开头的索引的所有类型中搜索</div>
+<p><code>curl GET 'localhost:9200/g*,u*/_search</code></p>
+</div>
+<div class="paragraph">
+<div class="title">在索引 gb 的类型 user 中搜索</div>
+<p><code>curl GET 'localhost:9200/gb/user/_search</code></p>
+</div>
+<div class="paragraph">
+<div class="title">在索引 gb 和 us 的类型为 user 和 tweet 中搜索</div>
+<p><code>curl GET 'localhost:9200/gb,us/user,tweet/_search</code></p>
+</div>
+<div class="listingblock">
+<div class="title">分页，每页显示5个结果，页码从1到3</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">curl GET 'localhost:9200/_search?size=5'
+curl GET 'localhost:9200/_search?size=5&amp;from=5'
+curl GET 'localhost:9200/_search?size=5&amp;from=10'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_请求体查询">14.1.2. 请求体查询</h4>
+<div class="listingblock">
+<div class="title">字符串查询</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">curl GET 'localhost:9200/index_2014*/type1,type2/_search
+{}'</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Post请求</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">curl POST 'localhost:9200/_search
+{
+"from": 30,
+"size": 10
+}'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_结构化查询">14.1.3. 结构化查询</h4>
+<div class="listingblock">
+<div class="title">传递 query 参数进行查询</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">GET /_search
+{
+"query": YOUR_QUERY_HERE
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">空查询</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">GET /_search
+{
+"query": {
+"match_all": {}
+}
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">查询子句</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">GET /_search
+{
+"query": {
+"match": {
+"tweet": "elasticsearch"
+}
+}
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_查询与过滤">14.1.4. 查询与过滤</h4>
+<div class="listingblock">
+<div class="title">term 过滤,主要用于精确匹配哪些值</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="text" class="language-text hljs">{ "term": { "age": 26 }}
+{ "term": { "date": "2014-09-01" }}
+{ "term": { "public": true }}
+{ "term": { "tag": "full_text" }}
+
+#terms 允许指定多个匹配条件
+{
+"terms": {
+"tag": [ "search", "full_text", "nosql" ]
+}
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">range 按照指定范围查找数据</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">{
+"range": {
+"age": {
+"gte": 20,
+"lt": 30
+}
+}
+}</code></pre>
+</div>
+</div>
+<div class="dlist">
+<div class="title">范围操作符包含：</div>
+<dl>
+<dt class="hdlist1">gt </dt>
+<dd>
+<p>大于</p>
+</dd>
+<dt class="hdlist1">gte </dt>
+<dd>
+<p>大于等于</p>
+</dd>
+<dt class="hdlist1">lt </dt>
+<dd>
+<p>小于</p>
+</dd>
+<dt class="hdlist1">lte </dt>
+<dd>
+<p>小于等于</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<div class="title">exists 和 missing</div>
+<p>查找文档中是否包含指定字段或没有某个字段</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="text" class="language-text hljs">{
+"exists": {
+"field": "title"
+}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="title">bool 过滤</div>
+<p>bool 过滤可以用来合并多个过滤条件查询结果的布尔逻辑，它包含以下操作符：</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">must </dt>
+<dd>
+<p>多个查询条件的完全匹配,相当于 and 。</p>
+</dd>
+<dt class="hdlist1">must_not </dt>
+<dd>
+<p>多个查询条件的相反匹配，相当于 not 。</p>
+</dd>
+<dt class="hdlist1">should </dt>
+<dd>
+<p>至少有一个查询条件匹配, 相当于 or 。
+这些参数可以分别继承一个过滤条件或者一个过滤条件的数组：</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">{
+"bool": {
+"must": { "term": { "folder": "inbox" }},
+"must_not": { "term": { "tag": "spam" }},
+"should": [
+{ "term": { "starred": true }},
+{ "term": { "unread": true }}
+]
+}
+}</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_MongoDB_chapter">15. MongoDB</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_mongodb">15.1. <code>MongoDB</code></h3>
+<div class="sect3">
+<h4 id="_安装_4">15.1.1. 安装</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_基本操作">15.1.2. 基本操作</h4>
+<div class="paragraph">
+<div class="title">创建数据库</div>
+<p><code>use database_name</code></p>
+</div>
+<div class="paragraph">
+<div class="title">删除数据库</div>
+<p><code>db.dropDatabase()</code></p>
+</div>
+<div class="paragraph">
+<div class="title">创建集合</div>
+<p><code>db.createCollection("users")</code></p>
+</div>
+<div class="paragraph">
+<div class="title">删除集合</div>
+<p><code>db.user.drop()</code></p>
+</div>
+<div class="paragraph">
+<div class="title">插入文档</div>
+<p><code>db.users.insert({name:'zhangsan',age:18})</code><br>
+<code>db.users.save({name:'lisisi',age:16})</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+insert和save方法都可以插入数据，当默认的“_id”值已存在时，调用insert方法插入会报错；而save方法不会,会更新相同的_id所在行数据的信息。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<div class="title">删除文档</div>
+<p><code>db.users.remove({'name':'zhangsan'})</code><br>
+<code>db.collection.drop()</code></p>
+</div>
+<div class="listingblock">
+<div class="title">修改文档</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">db.users.update({'name':'zhangsan'},{$set:{'name':'wanger'}})
+
+#修改多条相同的文档，需要设置 multi 参数为 true
+db.collection_name.update({"字段名":"字段值"},{$set:{"要修改的字段名":"修改后的字段值"}},{multi:true})</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="title">查询文档</div>
+<p><code>db.collection.find(query, projection)</code></p>
+</div>
+<div class="paragraph">
+<div class="title">易读方式</div>
+<p><code>db.collection.find(query, projection).pretty()</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_条件查询">15.1.3. 条件查询</h4>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">等于 </dt>
+<dd>
+<p>db.col.find({"by":"root"}).pretty()</p>
+</dd>
+<dt class="hdlist1">lt 小于 </dt>
+<dd>
+<p>db.col.find({"likes":{$lt:50}}).pretty()</p>
+</dd>
+<dt class="hdlist1">lte 小于或等于 </dt>
+<dd>
+<p>db.col.find({"likes":{$lte:50}}).pretty()</p>
+</dd>
+<dt class="hdlist1">gt 大于 </dt>
+<dd>
+<p>db.col.find({"likes":{$gt:50}}).pretty()</p>
+</dd>
+<dt class="hdlist1">gte 大于或等于 </dt>
+<dd>
+<p>db.col.find({"likes":{$gte:50}}).pretty()</p>
+</dd>
+<dt class="hdlist1">ne 不等于 </dt>
+<dd>
+<p>db.col.find({"likes":{$ne:50}}).pretty()</p>
+</dd>
+<dt class="hdlist1">and </dt>
+<dd>
+<p>db.col.find({key1:value1, key2:value2}).pretty()</p>
+</dd>
+<dt class="hdlist1">or </dt>
+<dd>
+<p>db.col.find({$or: [{key1: value1}, {key2:value2}]}).pretty()</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<div class="title">Limit</div>
+<p><code>db.col.find().limit(NUMBER)</code></p>
+</div>
+<div class="paragraph">
+<div class="title">skip 跳过数据读取</div>
+<p><code>db.col.find({},{"title":1,_id:0}).limit(1).skip(1)</code></p>
+</div>
+<div class="paragraph">
+<div class="title">排序</div>
+<p>1：升序，-1：降序<br>
+<code>db.col.find().sort({KEY:1})</code></p>
+</div>
+<div class="paragraph">
+<div class="title">索引</div>
+<p><code>db.col.createIndex({"title":1})</code></p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">查看集合索引 </dt>
+<dd>
+<p>db.col.getIndexes()</p>
+</dd>
+<dt class="hdlist1">查看集合索引大小 </dt>
+<dd>
+<p>db.col.totalIndexSize()</p>
+</dd>
+<dt class="hdlist1">删除集合所有索引 </dt>
+<dd>
+<p>db.col.dropIndexes()</p>
+</dd>
+<dt class="hdlist1">删除集合指定索引 </dt>
+<dd>
+<p>db.col.dropIndex("索引名称")</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<div class="title">聚合</div>
+<p><code>db.col.aggregate([{$group : {_id : "$by_user", num : {$sum : 1}}}])</code></p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">$sum </dt>
+<dd>
+<p>计算总和，{$sum: 1}表示返回总和×1的值(即总和的数量),使用{$sum: '$制定字段'}也能直接获取制定字段的值的总和</p>
+</dd>
+<dt class="hdlist1">$avg </dt>
+<dd>
+<p>求平均值</p>
+</dd>
+<dt class="hdlist1">$min </dt>
+<dd>
+<p>求min值</p>
+</dd>
+<dt class="hdlist1">$max </dt>
+<dd>
+<p>求max值</p>
+</dd>
+<dt class="hdlist1">$push </dt>
+<dd>
+<p>将结果文档中插入值到一个数组中</p>
+</dd>
+<dt class="hdlist1">$first </dt>
+<dd>
+<p>根据文档的排序获取第一个文档数据</p>
+</dd>
+<dt class="hdlist1">$last </dt>
+<dd>
+<p>获取最后一个数据</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-10-22 16:06:42 +0800
+Last updated 2020-11-26 14:48:02 +0800
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
