@@ -1782,6 +1782,15 @@ slave:
 93a238d7-5150-11ea-9fb7-080027da57dd:1-66</code></pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="title">解决Last_IO_Error：1236报错</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">RESET MASTER;
+set global gtid_purged = 'xxxx';                 -- 这里xxxx是Master的Executed_Gtid_Set
+start slave;
+show slave status\G;</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -4487,9 +4496,6 @@ PLAY RECAP ****************************************************
 </div>
 </div>
 <div style="page-break-after: always;"></div>
-<div class="paragraph">
-<p>include::book/14-Command</p>
-</div>
 </div>
 </div>
 </div>
@@ -4936,7 +4942,7 @@ db.collection_name.update({"字段名":"字段值"},{$set:{"要修改的字段�
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-11-26 14:48:02 +0800
+Last updated 2020-12-16 16:19:30 +0800
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
