@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.10">
+<meta name="generator" content="Asciidoctor 2.0.15">
 <meta name="author" content="&lt;wangpeng20199@gmail.com&gt;">
 <title>系统工程师实战</title>
 <style>
@@ -287,9 +287,11 @@ h1 strong, h2 strong, h3 strong, #toctitle strong, .sidebarblock > .content > .t
 .clearfix:before, .clearfix:after, .float-group:before, .float-group:after { content: " "; display: table; }
 .clearfix:after, .float-group:after { clear: both; }
 
-*:not(pre) > code { font-size: 0.9375em; font-style: normal !important; letter-spacing: 0; padding: 0.1em 0.5ex; word-spacing: -0.15em; background-color: #f7f7f8; -webkit-border-radius: 4px; border-radius: 4px; line-height: 1.45; text-rendering: optimizeSpeed; }
+*:not(pre) > code { font-size: 0.9375em; font-style: normal !important; letter-spacing: 0; padding: 0.1em 0.5ex; word-spacing: -0.15em; background-color: #f7f7f8; -webkit-border-radius: 4px; border-radius: 4px; line-height: 1.45; text-rendering: optimizeSpeed; border: 1px dashed #2f6fab;}
 
-pre, pre > code { line-height: 1.45; color: rgba(0, 0, 0, 0.9); font-family: "Droid Sans Mono", "DejaVu Sans Mono", "Monospace", monospace; font-weight: normal; text-rendering: optimizeSpeed; }
+pre {border: 1px dashed gray;}
+
+pre, pre > code { line-height: 1.45; color: rgba(0, 0, 0, 0.9); font-family: "Droid Sans Mono", "DejaVu Sans Mono", "Monospace", monospace; font-weight: normal; text-rendering: optimizeSpeed;}
 
 .keyseq { color: rgba(51, 51, 51, 0.8); }
 
@@ -405,7 +407,9 @@ table.tableblock #preamble > .sectionbody > .paragraph:first-of-type p { font-si
 
 .exampleblock > .content > :last-child > :last-child, .exampleblock > .content .olist > ol > li:last-child > :last-child, .exampleblock > .content .ulist > ul > li:last-child > :last-child, .exampleblock > .content .qlist > ol > li:last-child > :last-child, .sidebarblock > .content > :last-child > :last-child, .sidebarblock > .content .olist > ol > li:last-child > :last-child, .sidebarblock > .content .ulist > ul > li:last-child > :last-child, .sidebarblock > .content .qlist > ol > li:last-child > :last-child { margin-bottom: 0; }
 
-.literalblock pre, .listingblock pre:not(.highlight), .listingblock pre[class="highlight"], .listingblock pre[class^="highlight "], .listingblock pre.CodeRay, .listingblock pre.prettyprint { background: #f7f7f8; }
+.listingblock pre:not(.highlight) {color: white; background: #002b36; }
+
+.literalblock pre, .listingblock pre[class="highlight"], .listingblock pre[class^="highlight "], .listingblock pre.CodeRay, .listingblock pre.prettyprint { background: #f7f7f8; }
 .sidebarblock .literalblock pre, .sidebarblock .listingblock pre:not(.highlight), .sidebarblock .listingblock pre[class="highlight"], .sidebarblock .listingblock pre[class^="highlight "], .sidebarblock .listingblock pre.CodeRay, .sidebarblock .listingblock pre.prettyprint { background: #f2f1f1; }
 
 .literalblock pre, .literalblock pre[class], .listingblock pre, .listingblock pre[class] { -webkit-border-radius: 4px; border-radius: 4px; word-wrap: break-word; padding: 1em; font-size: 0.8125em; }
@@ -740,6 +744,7 @@ p { margin-bottom: 1.25rem; }
 
 </style>
 <link rel="stylesheet" href="css/font-awesome.css">
+<link rel="stylesheet" href="css/github.min.css">
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
@@ -750,11 +755,7 @@ p { margin-bottom: 1.25rem; }
 <div id="toc" class="toc2">
 <div id="toctitle">目录</div>
 <ul class="sectlevel1">
-<li><a href="#_前言">前言</a>
-<ul class="sectlevel2">
-<li><a href="#_贡献名单">贡献名单</a></li>
-</ul>
-</li>
+<li><a href="#_前言">前言</a></li>
 <li><a href="#_Zabbix_chapter">1. Zabbix</a>
 <ul class="sectlevel2">
 <li><a href="#_zabbix">1.1. zabbix</a>
@@ -921,11 +922,13 @@ p { margin-bottom: 1.25rem; }
 <li><a href="#_centos7_install_python38">9.1. CentOS7 Install Python38</a>
 <ul class="sectlevel3">
 <li><a href="#_二进制压缩包安装">9.1.1. 二进制压缩包安装</a></li>
+<li><a href="#_编译安装python383">9.1.2. 编译安装Python383</a></li>
 </ul>
 </li>
 <li><a href="#_centos8_install_python38">9.2. CentOS8 Install Python38</a>
 <ul class="sectlevel3">
 <li><a href="#_二进制压缩包安装_2">9.2.1. 二进制压缩包安装</a></li>
+<li><a href="#_python创建虚拟环境">9.2.2. Python创建虚拟环境</a></li>
 </ul>
 </li>
 </ul>
@@ -1011,6 +1014,32 @@ p { margin-bottom: 1.25rem; }
 </li>
 </ul>
 </li>
+<li><a href="#_Git_chapter">18. Git</a>
+<ul class="sectlevel2">
+<li><a href="#_git_2">18.1. <code>Git</code></a>
+<ul class="sectlevel3">
+<li><a href="#_新建分支推送到远程服务器">18.1.1. 新建分支推送到远程服务器</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_Linux_chapter">19. Linux</a>
+<ul class="sectlevel2">
+<li><a href="#_linux系统相关">19.1. Linux系统相关</a>
+<ul class="sectlevel3">
+<li><a href="#_变量">19.1.1. 变量</a></li>
+<li><a href="#_传参">19.1.2. 传参</a></li>
+<li><a href="#_运算符">19.1.3. 运算符</a></li>
+<li><a href="#_vim">19.1.4. vim</a></li>
+<li><a href="#_systemctl">19.1.5. Systemctl</a></li>
+<li><a href="#_systemctl_参数">19.1.6. <code>systemctl</code> 参数</a></li>
+<li><a href="#_配置_service">19.1.7. 配置 <code>.service</code></a></li>
+<li><a href="#_配置_timer">19.1.8. 配置 <code>.timer</code></a></li>
+<li><a href="#_ulimit">19.1.9. Ulimit</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -1019,15 +1048,15 @@ p { margin-bottom: 1.25rem; }
 <h2 id="_前言">前言</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>一本关于个人成长、软件开发、系统运维、思维、思考的杂记。</p>
+<p>排坑日记</p>
 </div>
-<div class="sect2">
-<h3 id="_贡献名单">贡献名单</h3>
+<div class="paragraph">
+<p>===</p>
+</div>
 <div class="paragraph">
 <p><strong>按时间先后</strong></p>
 </div>
 <div style="page-break-after: always;"></div>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -1048,7 +1077,7 @@ p { margin-bottom: 1.25rem; }
 <div class="listingblock">
 <div class="title">查看安装的软件包</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="console" class="language-console hljs">[root@redas_core ~]# rpm -aq |grep zabbix
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">[root@redas_core ~]# rpm -aq |grep zabbix
 zabbix-web-mysql-4.4.4-1.el7.noarch
 zabbix-get-4.4.4-1.el7.x86_64
 zabbix-server-mysql-4.4.4-1.el7.x86_64
@@ -1071,7 +1100,7 @@ zabbix-web-4.4.4-1.el7.noarch</code></pre>
 <div class="listingblock">
 <div class="title">查看数据库</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="console" class="language-console hljs">mysql&gt; show databases;
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">mysql&gt; show databases;
 +--------------------+
 | Database           |
 +--------------------+
@@ -1092,7 +1121,7 @@ zabbix-web-4.4.4-1.el7.noarch</code></pre>
 <div class="listingblock">
 <div class="title">查看用户</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="console" class="language-console hljs">[root@redas_core ~]# mysql -uzabbix -pgeek zabbix -e "show tables"
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">[root@redas_core ~]# mysql -uzabbix -pgeek zabbix -e "show tables"
 +----------------------------+
 | Tables_in_zabbix           |
 +----------------------------+
@@ -1110,7 +1139,7 @@ zabbix-web-4.4.4-1.el7.noarch</code></pre>
 <div class="listingblock">
 <div class="title">查看导入数据</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="console" class="language-console hljs">mysql&gt; show tables;
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">mysql&gt; show tables;
 +----------------------------+
 | Tables_in_zabbix           |
 +----------------------------+
@@ -1260,7 +1289,7 @@ zabbix-web-4.4.4-1.el7.noarch</code></pre>
 <div class="listingblock">
 <div class="title">设置 <code>Access Tokens</code></div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="txt" class="language-txt hljs">用户 --&gt; settings --&gt; Access Tokens
+<pre class="highlightjs highlight"><code class="language-txt hljs" data-lang="txt">用户 --&gt; settings --&gt; Access Tokens
 
 填写名称:
 
@@ -1276,7 +1305,7 @@ PhY2RK4spkepP9g_3yf9</code></pre>
 <div class="listingblock">
 <div class="title">添加公钥</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="txt" class="language-txt hljs">用户 --&gt; settings --&gt; SSH Keys
+<pre class="highlightjs highlight"><code class="language-txt hljs" data-lang="txt">用户 --&gt; settings --&gt; SSH Keys
 
 cd ~/.ssh/ 查看自己的公钥添加到gitlab,通常是以.pub结尾的文件
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKhTFrjT3qhHAKhQDaU1ZKkIYANiByqFYXA+3L+thfghkwt3+hrCNZ17LU+/vIl0lIn4pbgjtkYuI7wVVUW9Z7PeNRVMSy6Ql70RD6ZF9BdfCBnPoNs3Ad3S2IVQ3WkqIrXKfKDcypLibSECR8+7yQagnxAOXl2qjEeywv06M3Z2TUdUJ9VgSagZOvTvQB3h4SEuJ3RxinhkRNiuWwUcx3Q1t2Bf2VTvBkCfZHTADXc0+uKVwHGuTHZzP+Y1hK9Pqpb3pv4qUcq4Pu0dcLS8HElOe2xo8DXu7yXvDGOJrDbNQytk/+bzc3wmIGlkr8SKvuEVZ+nD32D2byCyNnP91d root@vir19
@@ -1293,13 +1322,13 @@ EOF</code></pre>
 <div class="listingblock">
 <div class="title">创建项目</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="txt" class="language-txt hljs">Create new project --&gt; 填写项目名称 --&gt; Create project --&gt; clone</code></pre>
+<pre class="highlightjs highlight"><code class="language-txt hljs" data-lang="txt">Create new project --&gt; 填写项目名称 --&gt; Create project --&gt; clone</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">创建 <code>webhook</code></div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="txt" class="language-txt hljs">Projects --&gt; redas_lib --&gt; settings --&gt; Integrations
+<pre class="highlightjs highlight"><code class="language-txt hljs" data-lang="txt">Projects --&gt; redas_lib --&gt; settings --&gt; Integrations
 （Jenkins --&gt; 项目 --&gt; Build when a change is pushed to GitLab. GitLab webhook URL:）
 url: http://192.168.2.19:8080/project/redas_lib
 勾选：Push events
@@ -1310,7 +1339,7 @@ url: http://192.168.2.19:8080/project/redas_lib
 <div class="listingblock">
 <div class="title">允许本地网络请求</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="txt" class="language-txt hljs">Admin Area --&gt; settings --&gt; Network --&gt; Outbound requests --&gt; Expand
+<pre class="highlightjs highlight"><code class="language-txt hljs" data-lang="txt">Admin Area --&gt; settings --&gt; Network --&gt; Outbound requests --&gt; Expand
 勾选：Allow requests to the local network from web hooks and services</code></pre>
 </div>
 </div>
@@ -1380,14 +1409,14 @@ url: http://192.168.2.19:8080/project/redas_lib
 <div class="listingblock">
 <div class="title">安装插件</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="txt" class="language-txt hljs">gitlab
+<pre class="highlightjs highlight"><code class="language-txt hljs" data-lang="txt">gitlab
 gitlab hook</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">配置 <code>SSH</code> 密钥</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="txt" class="language-txt hljs">凭据 --&gt; 系统 --&gt; 全局凭据 --&gt;添加凭据
+<pre class="highlightjs highlight"><code class="language-txt hljs" data-lang="txt">凭据 --&gt; 系统 --&gt; 全局凭据 --&gt;添加凭据
 
 kind：SSH Username with private key
 description:jenkins_ssh_key
@@ -1400,7 +1429,7 @@ Private Key:(~/.ssh/目录查看自己的私钥，添加)
 <div class="listingblock">
 <div class="title">配置 <code>API token</code></div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="txt" class="language-txt hljs">凭据 --&gt; 系统 --&gt; 全局凭据 --&gt;添加凭据
+<pre class="highlightjs highlight"><code class="language-txt hljs" data-lang="txt">凭据 --&gt; 系统 --&gt; 全局凭据 --&gt;添加凭据
 
 kind：Gitlab api token
 API token: (gitlab服务器创建的API token)
@@ -1412,7 +1441,7 @@ API token: (gitlab服务器创建的API token)
 <div class="listingblock">
 <div class="title">修改配置</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="txt" class="language-txt hljs">系统管理 -&gt; 系统配置 -&gt;
+<pre class="highlightjs highlight"><code class="language-txt hljs" data-lang="txt">系统管理 -&gt; 系统配置 -&gt;
 Enable authentication for '/project' end-point  (web hook 403权限问题去掉打勾)
 Gitlab
 	Connection name	:gitlab7
@@ -1597,7 +1626,7 @@ Gitlab
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="text" class="language-text hljs">[root@cky ~]# crontab  -l
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">[root@cky ~]# crontab  -l
 */1 * * * * /bin/sh /usr/bin/vnstat_dump.sh
 #1 2 * * * /bin/sh /bak/local_bak/script/tar_mysql_bin.sh
 1 3 * * * /bin/sh /bak/local_bak/script/rsync_from_local.sh
@@ -1681,7 +1710,7 @@ slave 地址：192.168.43.114</p>
 <div class="listingblock">
 <div class="title">配置master</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">vim /etc/my.cnf
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">vim /etc/my.cnf
     [mysqld]
     default-authentication-plugin=mysql_native_password
     datadir=/var/lib/mysql
@@ -1705,7 +1734,7 @@ slave 地址：192.168.43.114</p>
 <div class="listingblock">
 <div class="title">配置slave</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">vim /etc/my.cnf
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">vim /etc/my.cnf
 [mysqld]
     default-authentication-plugin=mysql_native_password
     datadir=/var/lib/mysql
@@ -1746,7 +1775,7 @@ slave 地址：192.168.43.114</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="mysql" class="language-mysql hljs">CREATE USER 'slave123'@'%' IDENTIFIED BY 'geek';
+<pre class="highlightjs highlight"><code class="language-mysql hljs" data-lang="mysql">CREATE USER 'slave123'@'%' IDENTIFIED BY 'geek';
 GRANT REPLICATION SLAVE ON *.* TO 'slave123'@'%';
 flush privileges;
 stop slave;
@@ -1764,7 +1793,7 @@ show slave status\G</code></pre>
 <div class="listingblock">
 <div class="title">验证主从</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="txt" class="language-txt hljs">master:
+<pre class="highlightjs highlight"><code class="language-txt hljs" data-lang="txt">master:
     create database test1;
     show master status;
 
@@ -1805,7 +1834,7 @@ slave:
 <div class="listingblock">
 <div class="title">解决Last_IO_Error：1236报错</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">RESET MASTER;
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">RESET MASTER;
 set global gtid_purged = 'xxxx';                 -- 这里xxxx是Master的Executed_Gtid_Set
 start slave;
 show slave status\G;</code></pre>
@@ -1834,7 +1863,7 @@ show slave status\G;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="txt" class="language-txt hljs">&lt;?xml version="1.0"?&gt;
+<pre class="highlightjs highlight"><code class="language-txt hljs" data-lang="txt">&lt;?xml version="1.0"?&gt;
 &lt;!DOCTYPE mycat:schema SYSTEM "schema.dtd"&gt;
 &lt;mycat:schema xmlns:mycat="http://io.mycat/"&gt;
 
@@ -1860,7 +1889,7 @@ show slave status\G;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="txt" class="language-txt hljs">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<pre class="highlightjs highlight"><code class="language-txt hljs" data-lang="txt">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;!DOCTYPE mycat:server SYSTEM "server.dtd"&gt;
 &lt;mycat:server xmlns:mycat="http://io.mycat/"&gt;
 
@@ -1928,7 +1957,7 @@ show slave status\G;</code></pre>
 <h3 id="_centos7初始化">5.1. Centos7初始化</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">#查看主机名
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">#查看主机名
 hostnamectl status
 
 #修改主机名
@@ -1992,7 +2021,7 @@ echo "exclude=*.i386 *.i586 *.i686" &gt;&gt; /etc/yum.conf</code></pre>
 <div class="listingblock">
 <div class="title">增加 Nginx 官方源</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat &lt;&lt; EOF &gt; /etc/yum.repos.d/nginx.repo
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &lt;&lt; EOF &gt; /etc/yum.repos.d/nginx.repo
 [nginx-stable]
 name=nginx stable repo
 baseurl=http://nginx.org/packages/centos/\$releasever/\$basearch/
@@ -2036,7 +2065,7 @@ EOF</code></pre>
 <div class="listingblock">
 <div class="title">修改 nginx.conf</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat &lt;&lt; EOF &gt; /etc/nginx/nginx.conf
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &lt;&lt; EOF &gt; /etc/nginx/nginx.conf
 # For more information on configuration, see:
 #   * Official English Documentation: http://nginx.org/en/docs/
 #   * Official Russian Documentation: http://nginx.org/ru/docs/
@@ -2121,7 +2150,7 @@ EOF</code></pre>
 <div class="listingblock">
 <div class="title">增加默认Host</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">mkdir /etc/nginx/conf.d
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir /etc/nginx/conf.d
 
 cat &lt;&lt; EOF &gt; /etc/nginx/conf.d/default.conf
 server {
@@ -2178,7 +2207,7 @@ EOF</code></pre>
 <div class="listingblock">
 <div class="title">查看Nginx状态</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="console" class="language-console hljs"># systemctl status nginx
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console"># systemctl status nginx
 ● nginx.service - The nginx HTTP and reverse proxy server
    Loaded: loaded (/usr/lib/systemd/system/nginx.service; disabled; vendor preset: disabled)
    Active: active (running) since Fri 2019-11-29 14:02:31 CST; 1h 18min ago
@@ -2217,7 +2246,7 @@ LISTEN     0      128         :::80                      :::*                   
 <div class="listingblock">
 <div class="title">修改 <code>my.cnf</code></div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat &lt;&lt; EOF &gt; /etc/my.cnf
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &lt;&lt; EOF &gt; /etc/my.cnf
 [mysqld]
 datadir=/var/lib/mysql
 socket=/var/lib/mysql/mysql.sock
@@ -2277,7 +2306,7 @@ EOF</code></pre>
 <div class="listingblock">
 <div class="title">创建日志文件</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">touch /var/log/mariadb/general.log /var/log/mariadb/slowquery.log
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">touch /var/log/mariadb/general.log /var/log/mariadb/slowquery.log
 chown mysql:mysql /var/log/mariadb/general.log /var/log/mariadb/slowquery.log</code></pre>
 </div>
 </div>
@@ -2292,7 +2321,7 @@ chown mysql:mysql /var/log/mariadb/general.log /var/log/mariadb/slowquery.log</c
 <div class="listingblock">
 <div class="title">查看 <code>MySQL</code> 服务状态</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="console" class="language-console hljs"># systemctl status mariadb
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console"># systemctl status mariadb
 ● mariadb.service - MariaDB database server
    Loaded: loaded (/usr/lib/systemd/system/mariadb.service; enabled; vendor preset: disabled)
    Active: active (running) since Fri 2019-11-29 14:18:12 CST; 1h 7min ago
@@ -2320,7 +2349,7 @@ LISTEN     0      50     127.0.0.1:3306                     *:*                 
 <div class="listingblock">
 <div class="title">删除测试数据库和空密码用户</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">mysql -uroot -pgeek -e 'show databases;'
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mysql -uroot -pgeek -e 'show databases;'
 mysql -uroot -pgeek -e 'drop database test;'
 mysql -uroot -pgeek mysql -e 'delete from db;'
 mysql -uroot -pgeek mysql -e 'delete from user where Password="";'
@@ -2337,7 +2366,7 @@ mysql -uroot -pgeek -e 'flush privileges;'</code></pre>
 <div class="listingblock">
 <div class="title">安装PHP7.2</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">yum install -y rh-php72 \
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">yum install -y rh-php72 \
     rh-php72-php  \
     rh-php72-php-bcmath \
     rh-php72-php-fpm \
@@ -2359,7 +2388,7 @@ mysql -uroot -pgeek -e 'flush privileges;'</code></pre>
 <div class="listingblock">
 <div class="title">确认PHP状态</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="console" class="language-console hljs"># php -v
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console"># php -v
 PHP 7.2.24 (cli) (built: Nov  4 2019 10:23:08) ( NTS )
 Copyright (c) 1997-2018 The PHP Group
 Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
@@ -2373,7 +2402,7 @@ Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
 <div class="listingblock">
 <div class="title">修改php.ini</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs"># 启用 '&lt;? ... ?&gt;' 代码风格
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># 启用 '&lt;? ... ?&gt;' 代码风格
 sed -i '197s/short_open_tag = Off/short_open_tag = On/' /etc/opt/rh/rh-php72/php.ini
 
 # 禁止一些危险性高的函数
@@ -2394,7 +2423,7 @@ sed -i '902s#;date.timezone =#date.timezone = Asia/Shanghai#' /etc/opt/rh/rh-php
 <div class="listingblock">
 <div class="title">查看 <code>PHP-FPM</code> 服务状态</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs"># systemctl status rh-php72-php-fpm
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># systemctl status rh-php72-php-fpm
 ● rh-php72-php-fpm.service - The PHP FastCGI Process Manager
    Loaded: loaded (/usr/lib/systemd/system/rh-php72-php-fpm.service; enabled; vendor preset: disabled)
    Active: active (running) since Fri 2019-11-29 13:36:03 CST; 1h 56min ago
@@ -2426,7 +2455,7 @@ LISTEN     0      128    127.0.0.1:9000                     *:*                 
 <div class="listingblock">
 <div class="title">增加Nginx Host设置</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat &lt;&lt; EOF &gt; /etc/nginx/conf.d/drupal.foo.com.conf
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &lt;&lt; EOF &gt; /etc/nginx/conf.d/drupal.foo.com.conf
 server {
     listen       80;
 
@@ -2455,7 +2484,7 @@ nginx -t &amp;&amp; nginx -s reload</code></pre>
 <div class="listingblock">
 <div class="title">准备 <code>Drupal</code></div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">mkdir -p /data/web/drupal.foo.com
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir -p /data/web/drupal.foo.com
 
 # 使用 -O 参数指定保存文件名，会强制覆盖已经存在的文件
 wget https://ftp.drupal.org/files/projects/drupal-8.7.10.tar.gz -O drupal-8.7.10.tar.gz
@@ -2590,7 +2619,7 @@ Server is a backwards-compatible replacement for MySQL.</p>
 <div class="listingblock">
 <div class="title">修改 <code>nginx.conf</code></div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat &lt;&lt; EOF &gt; /etc/nginx/nginx.conf
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &lt;&lt; EOF &gt; /etc/nginx/nginx.conf
 	# For more information on configuration, see:
 	#   * Official English Documentation: http://nginx.org/en/docs/
 	#   * Official Russian Documentation: http://nginx.org/ru/docs/
@@ -2681,7 +2710,7 @@ EOF</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat &lt;&lt; EOF &gt; /etc/nginx/conf.d/default.conf
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &lt;&lt; EOF &gt; /etc/nginx/conf.d/default.conf
 	server {
 		listen       80 default_server;
 		listen       [::]:80 default_server;
@@ -2743,7 +2772,7 @@ EOF</code></pre>
 <div class="listingblock">
 <div class="title">修改 my.cnf</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat &lt;&lt; EOF &gt; /etc/my.cnf
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &lt;&lt; EOF &gt; /etc/my.cnf
 [mysqld]
 datadir=/var/lib/mysql
 socket=/var/lib/mysql/mysql.sock
@@ -2815,7 +2844,7 @@ EOF</code></pre>
 <div class="listingblock">
 <div class="title">删除测试数据库和空密码用户</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">mysql -uroot -pgeek -e 'show databases;'
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mysql -uroot -pgeek -e 'show databases;'
 mysql -uroot -pgeek -e 'drop database test;'
 mysql -uroot -pgeek mysql -e 'delete from db;'
 mysql -uroot -pgeek mysql -e 'delete from user where Password="";'
@@ -2832,7 +2861,7 @@ mysql -uroot -pgeek -e 'flush privileges;'</code></pre>
 <div class="listingblock">
 <div class="title">安装PHP7.2</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">dnf install -y \
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dnf install -y \
 		php  \
 		php-bcmath \
 		php-fpm \
@@ -2862,7 +2891,7 @@ mysql -uroot -pgeek -e 'flush privileges;'</code></pre>
 <div class="listingblock">
 <div class="title">修改php.ini</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sed -i '197s/short_open_tag = Off/short_open_tag = On/' /etc/opt/rh/rh-php72/php.ini
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sed -i '197s/short_open_tag = Off/short_open_tag = On/' /etc/opt/rh/rh-php72/php.ini
 
 # 禁止一些危险性高的函数
 sed -i '314s/disable_functions =/disable_functions = system,exec,shell_exec,passthru,set_time_limit,ini_alter,dl,openlog,syslog,readlink,symlink,link,leak,popen,escapeshellcmd,virtual,socket_create,mail,eval/' /etc/opt/rh/rh-php72/php.ini
@@ -2893,7 +2922,7 @@ sed -i '902s#;date.timezone =#date.timezone = Asia/Shanghai#' /etc/opt/rh/rh-php
 <div class="listingblock">
 <div class="title">增加Nginx Host设置</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat &lt;&lt; EOF &gt; /etc/nginx/conf.d/drupal.foo.com.conf
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &lt;&lt; EOF &gt; /etc/nginx/conf.d/drupal.foo.com.conf
 	server {
 		listen       80;
 
@@ -2922,7 +2951,7 @@ EOF</code></pre>
 <div class="listingblock">
 <div class="title">使用 -O 参数指定保存文件名，会强制覆盖已经存在的文件</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">wget https://ftp.drupal.org/files/projects/drupal-8.7.10.tar.gz -O drupal-8.7.10.tar.gz
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">wget https://ftp.drupal.org/files/projects/drupal-8.7.10.tar.gz -O drupal-8.7.10.tar.gz
 tar xf drupal-8.7.10.tar.gz
 mv drupal-8.7.10/* /data/web/drupal.foo.com
 rm -rf drupal-8.7.10
@@ -2990,7 +3019,7 @@ chmod -R 755 /data/web/drupal.foo.com</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="console" class="language-console hljs">[root@geekcamp ~]# mvn --version
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">[root@geekcamp ~]# mvn --version
 Apache Maven 3.0.5 (Red Hat 3.0.5-17)
 Maven home: /usr/share/maven
 Java version: 1.8.0_232, vendor: Oracle Corporation
@@ -3004,7 +3033,7 @@ OS name: "linux", version: "3.10.0-1062.el7.x86_64", arch: "amd64", family: "uni
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="console" class="language-console hljs">[root@geekcamp ~]# java -version
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">[root@geekcamp ~]# java -version
 openjdk version "1.8.0_232"
 OpenJDK Runtime Environment (build 1.8.0_232-b09)
 OpenJDK 64-Bit Server VM (build 25.232-b09, mixed mode)</code></pre>
@@ -3015,7 +3044,7 @@ OpenJDK 64-Bit Server VM (build 25.232-b09, mixed mode)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">mkdir ~/.m2
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir ~/.m2
 
 cat &lt;&lt; EOF &gt; ~/.m2/settings.xml
 &lt;settings&gt;
@@ -3043,7 +3072,7 @@ EOF</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="console" class="language-console hljs">[root@geekcamp ~]# java -version
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">[root@geekcamp ~]# java -version
 openjdk version "1.8.0_232"
 OpenJDK Runtime Environment (build 1.8.0_232-b09)
 OpenJDK 64-Bit Server VM (build 25.232-b09, mixed mode)
@@ -3062,7 +3091,7 @@ Current `best' version is /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.232.b09-0.el7_7.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">alternatives --set java `ls /usr/lib/jvm/java-11-openjdk-*/bin/java`
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">alternatives --set java `ls /usr/lib/jvm/java-11-openjdk-*/bin/java`
 
 alternatives --set jre_openjdk `ls -d /usr/lib/jvm/java-11-openjdk-*`
 
@@ -3074,7 +3103,7 @@ alternatives --set java_sdk_openjdk `ls -d /usr/lib/jvm/java-11-openjdk-*`</code
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="console" class="language-console hljs">[root@geekcamp ~]# java -version
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">[root@geekcamp ~]# java -version
 openjdk version "11.0.6" 2020-01-14 LTS
 OpenJDK Runtime Environment 18.9 (build 11.0.6+10-LTS)
 OpenJDK 64-Bit Server VM 18.9 (build 11.0.6+10-LTS, mixed mode, sharing)</code></pre>
@@ -3116,7 +3145,7 @@ OpenJDK 64-Bit Server VM 18.9 (build 11.0.6+10-LTS, mixed mode, sharing)</code><
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="console" class="language-console hljs">[root@geekcamp ~]# mysql -uroot -pgeek -e "show databases;"
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">[root@geekcamp ~]# mysql -uroot -pgeek -e "show databases;"
 +--------------------+
 | Database           |
 +--------------------+
@@ -3136,7 +3165,7 @@ OpenJDK 64-Bit Server VM 18.9 (build 11.0.6+10-LTS, mixed mode, sharing)</code><
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">[ ! -d "~/downloads/" ] &amp;&amp; mkdir ~/downloads/
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[ ! -d "~/downloads/" ] &amp;&amp; mkdir ~/downloads/
 cd ~/downloads/
 git clone https://github.com/xuxueli/xxl-job.git
 cd xxl-job
@@ -3148,7 +3177,7 @@ mvn -T 4 package</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">[ ! -d "/data/xxl-job/admin" ] &amp;&amp; mkdir -p /data/xxl-job/admin
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[ ! -d "/data/xxl-job/admin" ] &amp;&amp; mkdir -p /data/xxl-job/admin
 [ ! -d "/data/xxl-job/executor" ] &amp;&amp; mkdir -p /data/xxl-job/executor
 [ ! -d "/data/applogs" ] &amp;&amp; mkdir -p /data/applogs
 
@@ -3164,7 +3193,7 @@ echo y | cp xxl-job-executor-samples/xxl-job-executor-sample-springboot/src/main
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">[root@geekcamp xxl-job]# find /data/xxl-job/*
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[root@geekcamp xxl-job]# find /data/xxl-job/*
 /data/xxl-job/admin
 /data/xxl-job/admin/xxl-job-admin-2.2.0-SNAPSHOT.jar
 /data/xxl-job/admin/application.properties
@@ -3191,7 +3220,7 @@ echo y | cp xxl-job-executor-samples/xxl-job-executor-sample-springboot/src/main
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">mysql -uroot -pgeek -e "CREATE USER 'xxl_job'@'localhost' IDENTIFIED BY 'geek';"
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mysql -uroot -pgeek -e "CREATE USER 'xxl_job'@'localhost' IDENTIFIED BY 'geek';"
 mysql -uroot -pgeek -e "GRANT ALL ON xxl_job.* TO 'xxl_job'@'localhost' WITH GRANT OPTION;"</code></pre>
 </div>
 </div>
@@ -3206,7 +3235,7 @@ mysql -uroot -pgeek -e "GRANT ALL ON xxl_job.* TO 'xxl_job'@'localhost' WITH GRA
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="console" class="language-console hljs">[root@geekcamp xxl-job]# mysql -uxxl_job -pgeek xxl_job -e "show tables;"
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">[root@geekcamp xxl-job]# mysql -uxxl_job -pgeek xxl_job -e "show tables;"
 +--------------------+
 | Tables_in_xxl_job  |
 +--------------------+
@@ -3226,7 +3255,7 @@ mysql -uroot -pgeek -e "GRANT ALL ON xxl_job.* TO 'xxl_job'@'localhost' WITH GRA
 <h6 id="_设置配置文件">设置配置文件</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sed -i '26s/spring.datasource.username=root/spring.datasource.username=xxl_job/' /data/xxl-job/admin/application.properties
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sed -i '26s/spring.datasource.username=root/spring.datasource.username=xxl_job/' /data/xxl-job/admin/application.properties
 
 sed -i '27s/spring.datasource.password=root_pwd/spring.datasource.password=geek/' /data/xxl-job/admin/application.properties</code></pre>
 </div>
@@ -3236,7 +3265,7 @@ sed -i '27s/spring.datasource.password=root_pwd/spring.datasource.password=geek/
 <h6 id="_创建系统用户">创建系统用户</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">useradd --user-group --no-create-home --shell /sbin/nologin --comment "XXL-JOB" xxl_job
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">useradd --user-group --no-create-home --shell /sbin/nologin --comment "XXL-JOB" xxl_job
 chown -R xxl_job:xxl_job /data/applogs /data/xxl-job</code></pre>
 </div>
 </div>
@@ -3245,7 +3274,7 @@ chown -R xxl_job:xxl_job /data/applogs /data/xxl-job</code></pre>
 <h6 id="_增加_systemd_文件">增加 systemd 文件</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat &lt;&lt; EOF &gt; /usr/lib/systemd/system/xxl_job_admin.service
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &lt;&lt; EOF &gt; /usr/lib/systemd/system/xxl_job_admin.service
 [Unit]
 Description=XXL-JOB Admin Service
 After=network.target remote-fs.target nss-lookup.target
@@ -3277,7 +3306,7 @@ EOF</code></pre>
 <h6 id="_创建目录">创建目录</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">[ ! -d "/data/xxl-job/executor" ] &amp;&amp; mkdir -p /data/xxl-job/executor
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[ ! -d "/data/xxl-job/executor" ] &amp;&amp; mkdir -p /data/xxl-job/executor
 [ ! -d "/data/applogs" ] &amp;&amp; mkdir -p /data/applogs</code></pre>
 </div>
 </div>
@@ -3286,7 +3315,7 @@ EOF</code></pre>
 <h6 id="_设置配置文件_2">设置配置文件</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sed -i '9s#xxl.job.admin.addresses=http://127.0.0.1:8080/xxl-job-admin#xxl.job.admin.addresses=http://192.168.2.11:8080/xxl-job-admin#' \
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sed -i '9s#xxl.job.admin.addresses=http://127.0.0.1:8080/xxl-job-admin#xxl.job.admin.addresses=http://192.168.2.11:8080/xxl-job-admin#' \
 /data/xxl-job/executor/application.properties
 
 appname=xxl-job-executor-s01
@@ -3319,7 +3348,7 @@ sed -i "12s/xxl.job.executor.appname=xxl-job-executor-sample/xxl.job.executor.ap
 <h6 id="_创建系统用户_2">创建系统用户</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">useradd --user-group --no-create-home --shell /sbin/nologin --comment "XXL-JOB" xxl_job
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">useradd --user-group --no-create-home --shell /sbin/nologin --comment "XXL-JOB" xxl_job
 chown -R xxl_job:xxl_job /data/applogs /data/xxl-job/executor</code></pre>
 </div>
 </div>
@@ -3328,7 +3357,7 @@ chown -R xxl_job:xxl_job /data/applogs /data/xxl-job/executor</code></pre>
 <h6 id="_增加_systemd_文件_2">增加 systemd 文件</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat &lt;&lt; EOF &gt; /usr/lib/systemd/system/xxl_job_executor.service
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &lt;&lt; EOF &gt; /usr/lib/systemd/system/xxl_job_executor.service
 [Unit]
 Description=XXL-JOB Executor Service
 After=network.target remote-fs.target nss-lookup.target
@@ -3359,7 +3388,7 @@ EOF</code></pre>
 <h4 id="_启动_xxl_job_服务端">6.1.4. 启动 XXL-JOB 服务端</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">systemctl enable xxl_job_admin
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">systemctl enable xxl_job_admin
 systemctl start xxl_job_admin</code></pre>
 </div>
 </div>
@@ -3368,7 +3397,7 @@ systemctl start xxl_job_admin</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="console" class="language-console hljs">[root@geekcamp xxl-job]# systemctl status xxl_job_admin
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">[root@geekcamp xxl-job]# systemctl status xxl_job_admin
 ● xxl_job.service - XXL-JOB Service
    Loaded: loaded (/usr/lib/systemd/system/xxl_job.service; enabled; vendor preset: disabled)
    Active: active (running) since Thu 2020-01-16 13:56:05 CST; 1s ago
@@ -3405,7 +3434,7 @@ XXL-JOB默认密码：123456</p>
 <h4 id="_启动_xxl_job_客户端">6.1.5. 启动 XXL-JOB 客户端</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">systemctl enable xxl_job_executor
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">systemctl enable xxl_job_executor
 systemctl start xxl_job_executor</code></pre>
 </div>
 </div>
@@ -3414,7 +3443,7 @@ systemctl start xxl_job_executor</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="console" class="language-console hljs">[root@localhost admin]# systemctl status xxl_job_executor
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">[root@localhost admin]# systemctl status xxl_job_executor
 ● xxl_job_client.service - XXL-JOB Client
    Loaded: loaded (/usr/lib/systemd/system/xxl_job_client.service; enabled; vendor preset: disabled)
    Active: active (running) since Thu 2020-01-16 18:49:43 CST; 4s ago
@@ -3460,7 +3489,7 @@ LISTEN     0      100       [::]:8081                  [::]:*                   
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="console" class="language-console hljs"># lsmod | grep kvm
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console"># lsmod | grep kvm
 
 kvm_intel       138567  0
 kvm             441119  1 kvm_intel</code></pre>
@@ -3468,7 +3497,7 @@ kvm             441119  1 kvm_intel</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">systemctl start libvirtd
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">systemctl start libvirtd
 
 systemctl enable libvirtd
 
@@ -3486,7 +3515,7 @@ sysctl -p</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="xml" class="language-xml hljs">&lt;network&gt;
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;network&gt;
   &lt;name&gt;default&lt;/name&gt;
   &lt;uuid&gt;9719a6f8-7e16-4e7b-a592-909337ddaf73&lt;/uuid&gt;
   &lt;forward mode='nat'/&gt;
@@ -3509,7 +3538,7 @@ sysctl -p</code></pre>
 <div class="listingblock">
 <div class="title">重启libvirtd</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">systemctl restart libvirtd
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">systemctl restart libvirtd
 brctl stp virbr0 on</code></pre>
 </div>
 </div>
@@ -3518,7 +3547,7 @@ brctl stp virbr0 on</code></pre>
 <h5 id="_查看默认网桥virbr0">查看默认网桥virbr0</h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="console" class="language-console hljs"># ip a
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console"># ip a
 4: virbr0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue state DOWN
     link/ether 52:54:00:dd:9e:e0 brd ff:ff:ff:ff:ff:ff
     inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0
@@ -3538,7 +3567,7 @@ virbr0		8000.525400dd9ee0	off		virbr0-nic</code></pre>
 <div class="listingblock">
 <div class="title">nmcli依赖于NetworkManager服务</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">systemctl unmask NetworkManager
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">systemctl unmask NetworkManager
 systemctl start NetworkManager
 systemctl status NetworkManager</code></pre>
 </div>
@@ -3546,7 +3575,7 @@ systemctl status NetworkManager</code></pre>
 <div class="listingblock">
 <div class="title">添加物理网卡</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">nmcli c add type Ethernet autoconnect yes con-name eth2 ifname eth2
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">nmcli c add type Ethernet autoconnect yes con-name eth2 ifname eth2
 nmcli c add type bridge autoconnect yes con-name br1 ifname br1
 nmcli c modify br1 bridge.stp no
 nmcli c modify br1 ipv6.method ignore
@@ -3575,7 +3604,7 @@ nmcli c modify br1 ipv4.dns "223.5.5.5 223.6.6.6"</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat &lt;&lt; EOF &gt; /tmp/set_br1.sh
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &lt;&lt; EOF &gt; /tmp/set_br1.sh
 nmcli c delete em1
 nmcli c add type bridge-slave autoconnect yes con-name em1 ifname em1 master br1
 nmcli c up br1
@@ -3629,7 +3658,7 @@ CentOS 7 上意外关闭了 NetworkManager 服务，重启后导致无法访问�
 <div class="listingblock">
 <div class="title">添加到 <code>/etc/fstab</code></div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="txt" class="language-txt hljs">UUID=0836d695-2bb4-48db-a440-faccc6131761 /mnt                       xfs     defaults        0 0</code></pre>
+<pre class="highlightjs highlight"><code class="language-txt hljs" data-lang="txt">UUID=0836d695-2bb4-48db-a440-faccc6131761 /mnt                       xfs     defaults        0 0</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3646,7 +3675,7 @@ CentOS 7 上意外关闭了 NetworkManager 服务，重启后导致无法访问�
 <div class="listingblock">
 <div class="title">安装 vir</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">virt-install \
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">virt-install \
 --name centos_kvm \
 --ram 4096 \
 --disk path=/var/lib/libvirt/images/vm192168122253.img,size=100 \
@@ -3662,7 +3691,7 @@ CentOS 7 上意外关闭了 NetworkManager 服务，重启后导致无法访问�
 <div class="listingblock">
 <div class="title">已有虚拟机镜像安装</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">virt-install \
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">virt-install \
 --name gitlab \
 --ram 2048 \
 --disk path=/data/package/gitlab_centos7.img \
@@ -3772,7 +3801,7 @@ CentOS 7 上意外关闭了 NetworkManager 服务，重启后导致无法访问�
 <div class="listingblock">
 <div class="title">编辑 <code>backdump.service</code> 文件</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="txt" class="language-txt hljs">[Unit]
+<pre class="highlightjs highlight"><code class="language-txt hljs" data-lang="txt">[Unit]
 Description=mysql dump
 
 [Service]
@@ -3787,7 +3816,7 @@ WantedBy=multi-user.target</code></pre>
 <div class="listingblock">
 <div class="title">编辑 <code>mysqldump.sh</code> 文件</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">#!/bin/bash
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">#!/bin/bash
 /usr/bin/mysqldump -uroot -p'geek' --add-drop-table dedecms_foo_com &gt; dedecms_foo_com`date +%Y%m%d%H%M%S`.sql|tar -zcvf /data/db/dedecms_foo_com`date +%Y%m%d%H%M%S`.sql.tar.gz dedecms_foo_com`date +%Y%m%d%H%M%S`.sql
 rsync -a --log-file=/tmp/rsync.log /data/web/ root@192.168.2.8:/data/backup/web
 rsync -a --log-file=/tmp/rsync.log /data/db/ root@192.168.2.8:/data/backup/db</code></pre>
@@ -3816,7 +3845,7 @@ rsync -a --log-file=/tmp/rsync.log /data/db/ root@192.168.2.8:/data/backup/db</c
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="txt" class="language-txt hljs">Type=simple：默认值，执行ExecStart指定的命令，启动主进程
+<pre class="highlightjs highlight"><code class="language-txt hljs" data-lang="txt">Type=simple：默认值，执行ExecStart指定的命令，启动主进程
 Type=forking：以 fork 方式从父进程创建子进程，创建后父进程会立即退出
 Type=oneshot：一次性进程，Systemd 会等当前服务退出，再继续往下执行
 Type=dbus：当前服务通过D-Bus启动
@@ -3850,7 +3879,7 @@ Type=idle：若有其他任务执行完毕，当前服务才会运行</code></pr
 <div class="listingblock">
 <div class="title">编辑 <code>backdump.timer</code> 文件</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">[Unit]
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[Unit]
 Description=mysql dump
 
 [Timer]
@@ -3883,7 +3912,7 @@ WantedBy=timers.target</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="test" class="language-test hljs">    minutely → *-*-* *:*:00
+<pre class="highlightjs highlight"><code class="language-test hljs" data-lang="test">    minutely → *-*-* *:*:00
       hourly → *-*-* *:00:00
        daily → *-*-* 00:00:00
      monthly → *-*-01 00:00:00
@@ -3967,7 +3996,7 @@ WakeSystem：如果系统休眠，是否自动唤醒系统</code></pre>
 <h4 id="_二进制压缩包安装">9.1.1. 二进制压缩包安装</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">wget http://dl.cdgeekcamp.com/centos/7/python/3/python-3.8.1-1.el7.x86_64.tar.gz -O python-3.8.1-1.el7.x86_64.tar.gz
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">wget http://dl.cdgeekcamp.com/centos/7/python/3/python-3.8.1-1.el7.x86_64.tar.gz -O python-3.8.1-1.el7.x86_64.tar.gz
 
 tar xf python-3.8.1-1.el7.x86_64.tar.gz
 
@@ -3983,6 +4012,39 @@ pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</code>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_编译安装python383">9.1.2. 编译安装Python383</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Centos7编译安装 python38.3
+
+mkdir ~/downloads
+cd  ~/downloads
+wget https://www.python.org/ftp/python/3.8.3/Python-3.8.3.tar.xz -O Python-3.8.3.tar.xz
+tar xf Python-3.8.3.tar.xz
+cd Python-3.8.3
+
+# libffi-devel 解决错误："ImportError: No module named '_ctypes'"
+yum install -y gcc make openssl-devel libffi-devel
+
+./configure --prefix=/usr/local/python-3.8.3 \
+    --with-openssl=/usr \
+    --with-ssl-default-suites=openssl \
+    --with-ensurepip \
+    --enable-loadable-sqlite-extensions
+make -j32
+make install
+
+ln -s /usr/local/python-3.8.3 /usr/local/python3
+
+ln -s /usr/local/python3/bin/pip3 /usr/local/bin/pip38
+ln -s /usr/local/python3/bin/python3 /usr/local/bin/python38
+
+pip38 install --upgrade -i https://pypi.tuna.tsinghua.edu.cn/simple pip
+pip38 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_centos8_install_python38">9.2. CentOS8 Install Python38</h3>
@@ -3990,7 +4052,7 @@ pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</code>
 <h4 id="_二进制压缩包安装_2">9.2.1. 二进制压缩包安装</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">wget http://dl.cdgeekcamp.com/centos/8/python/3/python-3.8.1-1.el8.x86_64.tar.gz -O python-3.8.1-1.el8.x86_64.tar.gz
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">wget http://dl.cdgeekcamp.com/centos/8/python/3/python-3.8.1-1.el8.x86_64.tar.gz -O python-3.8.1-1.el8.x86_64.tar.gz
 
 tar xf python-3.8.1-1.el8.x86_64.tar.gz
 
@@ -4005,6 +4067,26 @@ pip3 install --upgrade -i https://pypi.tuna.tsinghua.edu.cn/simple pip
 pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</code></pre>
 </div>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_python创建虚拟环境">9.2.2. Python创建虚拟环境</h4>
+<div class="paragraph">
+<p>python3.3以后
+.创建虚拟环境
+<code>python38 -m venv env</code></p>
+</div>
+<div class="paragraph">
+<div class="title">进入虚拟环境</div>
+<p><code>source env/bin/activate</code></p>
+</div>
+<div class="paragraph">
+<div class="title">退出</div>
+<p><code>deactivate</code></p>
+</div>
+<div class="paragraph">
+<div class="title">虚拟环境中安装包使用绝对路径 (虚拟环境之外无法使用)</div>
+<p><code>/data/env/bin/pip3 install pymysql</code></p>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -4018,7 +4100,7 @@ pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</code>
 <div class="listingblock">
 <div class="title">安装maven  (配置环境变量)</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">wget http://ftp.meisei-u.ac.jp/mirror/apache/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">wget http://ftp.meisei-u.ac.jp/mirror/apache/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
 tar -xf apache-maven-3.6.3-bin.tar.gz
 mv apache-maven-3.6.3-bin.tar.gz /usr/local/
 
@@ -4032,7 +4114,7 @@ mvn -v</code></pre>
 <div class="listingblock">
 <div class="title">全局源</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat &lt;&lt; EOF &gt; ~/.m2/settings.xml
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &lt;&lt; EOF &gt; ~/.m2/settings.xml
 &lt;settings&gt;
   &lt;mirrors&gt;
     &lt;mirror&gt;
@@ -4052,7 +4134,7 @@ EOF</code></pre>
 <div class="listingblock">
 <div class="title">nodejs版本 12</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">wget https://nodejs.org/dist/v12.16.1/node-v12.16.1-linux-x64.tar.xz
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">wget https://nodejs.org/dist/v12.16.1/node-v12.16.1-linux-x64.tar.xz
 tar -xf node-v12.16.1-linux-x64.tar.xz
 mv node-v12.16.1-linux-x64 nodejs
 mv nodejs /usr/local/
@@ -4081,7 +4163,7 @@ npm config set registry https://registry.npm.taobao.org</code></pre>
 <div class="listingblock">
 <div class="title">配置 <code>bind</code></div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">options {
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">options {
         listen-on port 53 { any; };
         listen-on-v6 port 53 { ::1; };
         directory       "/var/named";
@@ -4124,7 +4206,7 @@ include "/etc/named.root.key";</code></pre>
 <div class="listingblock">
 <div class="title">添加正向解析域</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">vim /etc/named.rfc1912.zones
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">vim /etc/named.rfc1912.zones
 
 zone "xyt.com" IN {
         type master;
@@ -4155,7 +4237,7 @@ cloud           IN      A       10.10.10.18</code></pre>
 <div class="listingblock">
 <div class="title">检查配置</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="text" class="language-text hljs">[root@localhost ~]# named-checkzone "ooxx.com" /var/named/ooxx.com.zone
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">[root@localhost ~]# named-checkzone "ooxx.com" /var/named/ooxx.com.zone
 zone ooxx.com/IN: loaded serial 0
 OK</code></pre>
 </div>
@@ -4174,7 +4256,7 @@ OK</code></pre>
 <div class="listingblock">
 <div class="title">安装</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">sudo yum install -y yum-utils
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo yum install -y yum-utils
 sudo yum-config-manager \
     --add-repo \
     https://mirrors.ustc.edu.cn/docker-ce/linux/centos/docker-ce.repo
@@ -4198,7 +4280,7 @@ sudo systemctl start docker</code></pre>
 <div class="listingblock">
 <div class="title">自动化脚本安装</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs"># $ curl -fsSL test.docker.com -o get-docker.sh
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># $ curl -fsSL test.docker.com -o get-docker.sh
 curl -fsSL get.docker.com -o get-docker.sh
 sudo sh get-docker.sh --mirror Aliyun
 # $ sudo sh get-docker.sh --mirror AzureChinaCloud</code></pre>
@@ -4283,7 +4365,7 @@ sudo sh get-docker.sh --mirror Aliyun
 <div class="listingblock">
 <div class="title">文件 <code>Dockerfile</code></div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="txt" class="language-txt hljs">$ mkdir mynginx
+<pre class="highlightjs highlight"><code class="language-txt hljs" data-lang="txt">$ mkdir mynginx
 $ cd mynginx
 $ touch Dockerfile
 
@@ -4314,7 +4396,7 @@ USER &lt;用户名&gt;[:&lt;用户组&gt;]  #指定当前用户</code></pre>
 <div class="listingblock">
 <div class="title">推送镜像 (登录才能使用)</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="text" class="language-text hljs">$ docker tag ubuntu:18.04 username/ubuntu:18.04
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">$ docker tag ubuntu:18.04 username/ubuntu:18.04
 
 $ docker image ls
 
@@ -4348,7 +4430,7 @@ username/ubuntu</code></pre>
 <div class="listingblock">
 <div class="title">启动一个挂载数据卷的容器</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">docker run -d -P \
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -d -P \
     --name web \
     # -v my-vol:/usr/share/nginx/html \
     --mount source=my-vol,target=/usr/share/nginx/html \
@@ -4416,7 +4498,7 @@ roles 是一个目录，playbook 将使用它
 <div class="listingblock">
 <div class="title">创建配置文件</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat &lt;&lt; EOF &gt; ~/.ssh/config
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &lt;&lt; EOF &gt; ~/.ssh/config
 IdentityFile ~/.ssh/mk
 EOF</code></pre>
 </div>
@@ -4427,7 +4509,7 @@ EOF</code></pre>
 <div class="listingblock">
 <div class="title">添加主机</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">vim /etc/ansible/hosts
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">vim /etc/ansible/hosts
 
 [test]
 10.23.101.x
@@ -4437,7 +4519,7 @@ EOF</code></pre>
 <div class="listingblock">
 <div class="title">测试ansible</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">[root@localhost ~]# ansible "test" -m ping
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[root@localhost ~]# ansible "test" -m ping
 10.23.101.x | SUCCESS =&gt; {
     "ansible_facts": {
         "discovered_interpreter_python": "/usr/bin/python"
@@ -4477,7 +4559,7 @@ EOF</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">[root@localhost ~]# cat /etc/ansible/hellow.yml
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[root@localhost ~]# cat /etc/ansible/hellow.yml
 ---
 
 - name: say 'hello world'
@@ -4496,7 +4578,7 @@ EOF</code></pre>
 <div class="listingblock">
 <div class="title">运行</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">[root@localhost ~]# ansible-playbook /etc/ansible/hellow.yml
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[root@localhost ~]# ansible-playbook /etc/ansible/hellow.yml
 
 PLAY [say 'hello world'] ****************************
 
@@ -4533,7 +4615,7 @@ PLAY RECAP ****************************************************
 <div class="listingblock">
 <div class="title">健康检查</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">[root@elk1 ~]# curl 'localhost:9200/_cluster/health?pretty'
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[root@elk1 ~]# curl 'localhost:9200/_cluster/health?pretty'
 {
   "cluster_name" : "master-node",
   "status" : "green",
@@ -4564,7 +4646,7 @@ PLAY RECAP ****************************************************
 <div class="listingblock">
 <div class="title">空查询</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="text" class="language-text hljs">[root@elk1 ~]# curl GET 'localhost:9200/_search?pretty'
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">[root@elk1 ~]# curl GET 'localhost:9200/_search?pretty'
 curl: (6) Could not resolve host: GET; Unknown error
 {
   "took" : 9,           #请求花费的毫秒数
@@ -4609,7 +4691,7 @@ curl: (6) Could not resolve host: GET; Unknown error
 <div class="listingblock">
 <div class="title">分页，每页显示5个结果，页码从1到3</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">curl GET 'localhost:9200/_search?size=5'
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl GET 'localhost:9200/_search?size=5'
 curl GET 'localhost:9200/_search?size=5&amp;from=5'
 curl GET 'localhost:9200/_search?size=5&amp;from=10'</code></pre>
 </div>
@@ -4620,14 +4702,14 @@ curl GET 'localhost:9200/_search?size=5&amp;from=10'</code></pre>
 <div class="listingblock">
 <div class="title">字符串查询</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">curl GET 'localhost:9200/index_2014*/type1,type2/_search
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl GET 'localhost:9200/index_2014*/type1,type2/_search
 {}'</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Post请求</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">curl POST 'localhost:9200/_search
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl POST 'localhost:9200/_search
 {
 "from": 30,
 "size": 10
@@ -4640,7 +4722,7 @@ curl GET 'localhost:9200/_search?size=5&amp;from=10'</code></pre>
 <div class="listingblock">
 <div class="title">传递 query 参数进行查询</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">GET /_search
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">GET /_search
 {
 "query": YOUR_QUERY_HERE
 }</code></pre>
@@ -4649,7 +4731,7 @@ curl GET 'localhost:9200/_search?size=5&amp;from=10'</code></pre>
 <div class="listingblock">
 <div class="title">空查询</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">GET /_search
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">GET /_search
 {
 "query": {
 "match_all": {}
@@ -4660,7 +4742,7 @@ curl GET 'localhost:9200/_search?size=5&amp;from=10'</code></pre>
 <div class="listingblock">
 <div class="title">查询子句</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">GET /_search
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">GET /_search
 {
 "query": {
 "match": {
@@ -4676,7 +4758,7 @@ curl GET 'localhost:9200/_search?size=5&amp;from=10'</code></pre>
 <div class="listingblock">
 <div class="title">term 过滤,主要用于精确匹配哪些值</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="text" class="language-text hljs">{ "term": { "age": 26 }}
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">{ "term": { "age": 26 }}
 { "term": { "date": "2014-09-01" }}
 { "term": { "public": true }}
 { "term": { "tag": "full_text" }}
@@ -4692,7 +4774,7 @@ curl GET 'localhost:9200/_search?size=5&amp;from=10'</code></pre>
 <div class="listingblock">
 <div class="title">range 按照指定范围查找数据</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">{
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">{
 "range": {
 "age": {
 "gte": 20,
@@ -4729,7 +4811,7 @@ curl GET 'localhost:9200/_search?size=5&amp;from=10'</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="text" class="language-text hljs">{
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">{
 "exists": {
 "field": "title"
 }
@@ -4759,7 +4841,7 @@ curl GET 'localhost:9200/_search?size=5&amp;from=10'</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">{
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">{
 "bool": {
 "must": { "term": { "folder": "inbox" }},
 "must_not": { "term": { "tag": "spam" }},
@@ -4828,7 +4910,7 @@ insert和save方法都可以插入数据，当默认的“_id”值已存在时�
 <div class="listingblock">
 <div class="title">修改文档</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">db.users.update({'name':'zhangsan'},{$set:{'name':'wanger'}})
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">db.users.update({'name':'zhangsan'},{$set:{'name':'wanger'}})
 
 #修改多条相同的文档，需要设置 multi 参数为 true
 db.collection_name.update({"字段名":"字段值"},{$set:{"要修改的字段名":"修改后的字段值"}},{multi:true})</code></pre>
@@ -4969,7 +5051,7 @@ db.collection_name.update({"字段名":"字段值"},{$set:{"要修改的字段�
 <div class="listingblock">
 <div class="title">添加源</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">cat &lt;&lt; EOF &gt; /etc/yum.repos.d/nginx.repo
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &lt;&lt; EOF &gt; /etc/yum.repos.d/nginx.repo
 [nginx-stable]
 name=nginx stable repo
 baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
@@ -5040,7 +5122,7 @@ EOF</code></pre>
 <h4 id="_保存规则">17.1.2. 保存规则</h4>
 <div class="paragraph">
 <div class="title">保存规则到文件</div>
-<p><code>iptables-save &gt;/etc/sysconfig/iptables</code></p>
+<p><code>iptables-save &gt; /etc/sysconfig/iptables</code></p>
 </div>
 <div class="paragraph">
 <div class="title">保存规则</div>
@@ -5050,8 +5132,12 @@ EOF</code></pre>
 <div class="sect3">
 <h4 id="_使用">17.1.3. 使用</h4>
 <div class="paragraph">
-<div class="title">开放50082端口</div>
-<p><code>iptables -I  INPUT -p tcp --dport 22 -j ACCEPT</code></p>
+<div class="title">开放4545端口</div>
+<p><code>iptables -I  INPUT -p tcp --dport 4545 -j ACCEPT</code></p>
+</div>
+<div class="paragraph">
+<div class="title">开放50000-60000端口</div>
+<p><code>iptables -I INPUT -p tcp --dport 50000:60000 -j ACCEPT</code></p>
 </div>
 <div class="paragraph">
 <p>参数解释<br>
@@ -5081,7 +5167,485 @@ EOF</code></pre>
 <div class="title">删除对应链的规则</div>
 <p><code>iptables -D OUTPUT 1</code></p>
 </div>
+<div class="paragraph">
+<div class="title">配置默认的不让进</div>
+<p>`tables -P INPUT DROP `</p>
+</div>
+<div class="paragraph">
+<div class="title">默认的不允许转发</div>
+<p>`iptables -P FORWARD DROP `</p>
+</div>
+<div class="paragraph">
+<div class="title">默认的可以出去</div>
+<p>`iptables -P OUTPUT ACCEPT `</p>
+</div>
+<div class="paragraph">
+<div class="title">阻止Windows蠕虫的攻击</div>
+<p><code>iptables -I INPUT -j DROP -p tcp -s 0.0.0.0/0 -m string --algo kmp --string "cmd.exe"</code></p>
+</div>
+<div class="paragraph">
+<div class="title">防止SYN洪水攻击</div>
+<p><code>iptables -A INPUT -p tcp --syn -m limit --limit 5/second -j ACCEPT</code></p>
+</div>
+<div class="listingblock">
+<div class="title">保存规则到配置文件中</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cp /etc/sysconfig/iptables /etc/sysconfig/iptables.bak .任何改动之前先备份，请保持这一优秀的习惯
+iptables-save &gt; /etc/sysconfig/iptables
+cat /etc/sysconfig/iptables</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="https://wangchujiang.com/linux-command/c/iptables.html">Iptables详解</a></p>
+</div>
 <div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_Git_chapter">18. Git</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_git_2">18.1. <code>Git</code></h3>
+<div class="sect3">
+<h4 id="_新建分支推送到远程服务器">18.1.1. 新建分支推送到远程服务器</h4>
+<div class="paragraph">
+<div class="title">查看远程分支</div>
+<p><code>git branch -a</code></p>
+</div>
+<div class="paragraph">
+<div class="title">将远程主机的更新，全部取回本地</div>
+<p><code>git fetch</code></p>
+</div>
+<div class="paragraph">
+<div class="title">再次查看远程分支：</div>
+<p><code>git branch -a</code></p>
+</div>
+<div class="paragraph">
+<div class="title">然后拉取远程分支到本地：</div>
+<p><code>git checkout -b 远程分支名 origin/远程分支名</code></p>
+</div>
+<div class="paragraph">
+<div class="title">新建一个本地分支</div>
+<p><code>git checkout -b name</code></p>
+</div>
+<div class="paragraph">
+<div class="title">把新建的本地分支push到远程服务器</div>
+<p><code>git push origin name:name</code></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_Linux_chapter">19. Linux</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_linux系统相关">19.1. Linux系统相关</h3>
+<div class="paragraph">
+<div class="title">Linux显示线程限制</div>
+<p><code>ulimit -n</code></p>
+</div>
+<div class="paragraph">
+<div class="title">列出系统打开的文件</div>
+<p>`lsof `</p>
+</div>
+<div class="paragraph">
+<div class="title">筛选</div>
+<p><code>lsof -c java| awk '{print $4}' |grep "^[0-9]" |wc -l</code></p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">根据程序筛选</dt>
+<dd>
+<p>-c</p>
+</dd>
+<dt class="hdlist1">根据线程筛选</dt>
+<dd>
+<p>-p</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="https://cloud.tencent.com/developer/article/1574630">lsof详解</a></p>
+</div>
+<div class="paragraph">
+<div class="title">生成UUID</div>
+<p><code>uuidgen enp1s0</code></p>
+</div>
+<div class="paragraph">
+<div class="title">排序去重</div>
+<p><code>cat device_yu_name.txt |sort |uniq -c</code></p>
+</div>
+<div class="paragraph">
+<div class="title">更改系统日志级别</div>
+<p><code>echo 'LogLevel=debug' &gt;&gt; /etc/systemd/system.conf</code></p>
+</div>
+<div class="paragraph">
+<div class="title">最大可以打开的文件</div>
+<p><code>cat /etc/security/limits.conf</code></p>
+</div>
+<div class="paragraph">
+<div class="title">禁用SELINUX，必须重启才能生效</div>
+<p><code>echo SELINUX=disabled&gt;/etc/selinux/config</code>
+<code>echo SELINUXTYPE=targeted&gt;&gt;/etc/selinux/config</code></p>
+</div>
+<div class="paragraph">
+<div class="title">bz2文件解压</div>
+<p><code>yum install bzip2</code><br>
+<code>bzip2 -d name.bz2</code></p>
+</div>
+<div class="paragraph">
+<div class="title">更新动态链接库</div>
+<p><code>ldconfig</code></p>
+</div>
+<div class="paragraph">
+<div class="title">service服务增加文件限制</div>
+<p><code>LimitNOFILE=65535</code>
+==== shell</p>
+</div>
+<div class="sect3">
+<h4 id="_变量">19.1.1. 变量</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">your_name="qinjx"
+echo $your_name
+echo ${your_name}
+
+#只读变量
+myUrl="http://www.google.com"
+readonly myUrl
+myUrl="http://www.runoob.com"
+
+
+#删除变量
+#变量被删除后不能再次使用。unset 命令不能删除只读变量。
+unset myUrl
+
+
+
+#多行注释
+#EOF可换
+:&lt;&lt;EOF
+注释内容...
+注释内容...
+注释内容...
+EOF</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_传参">19.1.2. 传参</h4>
+<div class="dlist">
+<div class="title">参数解释</div>
+<dl>
+<dt class="hdlist1">$#</dt>
+<dd>
+<p>传递到脚本的参数个数</p>
+</dd>
+<dt class="hdlist1">$*</dt>
+<dd>
+<p>以一个单字符串显示所有向脚本传递的参数。如"$*"用「"」括起来的情况、以"$1 $2 … $n"的形式输出所有参数。</p>
+</dd>
+<dt class="hdlist1">$$</dt>
+<dd>
+<p>脚本运行的当前进程ID号</p>
+</dd>
+<dt class="hdlist1">$!</dt>
+<dd>
+<p>后台运行的最后一个进程的ID号</p>
+</dd>
+<dt class="hdlist1">$@</dt>
+<dd>
+<p>与$*相同，但是使用时加引号，并在引号中返回每个参数。如"$@"用「"」括起来的情况、以"$1" "$2" … "$n" 的形式输出所有参数。</p>
+</dd>
+<dt class="hdlist1">$-</dt>
+<dd>
+<p>显示Shell使用的当前选项，与set命令功能相同。</p>
+</dd>
+<dt class="hdlist1">$?</dt>
+<dd>
+<p>显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>$* 与 $@ 区别<br>
+相同点：都是引用所有参数<br>
+不同点：只有在双引号中体现出来。假设在脚本运行时写了三个参数 1、2、3，，则 " * " 等价于 "1 2 3"（传递了一个参数），而 "@" 等价于 "1" "2" "3"（传递了三个参数）。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_运算符">19.1.3. 运算符</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">-eq	检测两个数是否相等，相等返回 true。	                [ $a -eq $b ] 返回 false。
+-ne	检测两个数是否不相等，不相等返回 true。	            [ $a -ne $b ] 返回 true。
+-gt	检测左边的数是否大于右边的，如果是，则返回 true。	[ $a -gt $b ] 返回 false。
+-lt	检测左边的数是否小于右边的，如果是，则返回 true。	[ $a -lt $b ] 返回 true。
+-ge	检测左边的数是否大于等于右边的，如果是，则返回 true。	[ $a -ge $b ] 返回 false。
+-le	检测左边的数是否小于等于右边的，如果是，则返回 true。	[ $a -le $b ] 返回 true。
+
+
+!	非运算，表达式为 true 则返回 false，否则返回 true。	[ ! false ] 返回 true。
+-o	或运算，有一个表达式为 true 则返回 true。	        [ $a -lt 20 -o $b -gt 100 ] 返回 true。
+-a	与运算，两个表达式都为 true 才返回 true。	        [ $a -lt 20 -a $b -gt 100 ] 返回 false。</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+条件表达式要放在方括号之间，并且要有空格，例如: [$a==$b] 是错误的，必须写成 [ $a == $b ]。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_vim">19.1.4. vim</h4>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">0 或功能键[Home]</dt>
+<dd>
+<p>这是数字“ 0 ”:移动到这一列的最前面字符处 (常用)</p>
+</dd>
+<dt class="hdlist1">$ 或功能键[End]</dt>
+<dd>
+<p>移动到这一列的最后面字符处(常用</p>
+</dd>
+<dt class="hdlist1">G</dt>
+<dd>
+<p>移动到这个文件的最后一列(常用)</p>
+</dd>
+<dt class="hdlist1">gg</dt>
+<dd>
+<p>移动到这个文件的第一列,相当于 1G 啊! (常用)</p>
+</dd>
+<dt class="hdlist1">n&lt;Enter&gt;</dt>
+<dd>
+<p>为数字。光标向下移动 n 列(常用)</p>
+</dd>
+<dt class="hdlist1">x, X</dt>
+<dd>
+<p>在一列字当中,x 为向后删除一个字符
+[backspace] 亦即是倒退键) (常用)相当于[del]按键), X为向前删除一个字符</p>
+</dd>
+<dt class="hdlist1">nx</dt>
+<dd>
+<p>n 为数字,连续向后删除 n 个字符。举例来说,我要连续删除 10 个字符, “10x”。</p>
+</dd>
+<dt class="hdlist1">dd</dt>
+<dd>
+<p>删除光标所在的那一整列(常用)</p>
+</dd>
+<dt class="hdlist1">u</dt>
+<dd>
+<p>复原前一个动作。(常用)</p>
+</dd>
+<dt class="hdlist1">ndd</dt>
+<dd>
+<p>n 为数字。删除光标所在的向下 n 列,例如 20dd 则是删除 20 列 (常用)</p>
+</dd>
+<dt class="hdlist1">H</dt>
+<dd>
+<p>光标移动到这个屏幕的最上方那一列的第一个字符</p>
+</dd>
+<dt class="hdlist1">M</dt>
+<dd>
+<p>光标移动到这个屏幕的中央那一列的第一个字符</p>
+</dd>
+<dt class="hdlist1">L</dt>
+<dd>
+<p>光标移动到这个屏幕的最下方那一列的第一个字符</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_systemctl">19.1.5. Systemctl</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_systemctl_参数">19.1.6. <code>systemctl</code> 参数</h4>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">list-units</dt>
+<dd>
+<p>列出 systemd 当前已加载到内存中的单元</p>
+</dd>
+<dt class="hdlist1">list-timers</dt>
+<dd>
+<p>列出当前已加载到内存中的定时器(timer)单元，并按照下次执行的时间点排序</p>
+</dd>
+<dt class="hdlist1">is-active</dt>
+<dd>
+<p>检查指定的单元中， 是否有处于活动(active)状态的单元</p>
+</dd>
+<dt class="hdlist1">cat</dt>
+<dd>
+<p>显示指定单元的单元文件内容</p>
+</dd>
+<dt class="hdlist1">list-dependencies</dt>
+<dd>
+<p>显示单元的依赖关系</p>
+</dd>
+<dt class="hdlist1">enable</dt>
+<dd>
+<p>设为"开机时自动启动"或"插入某个硬件时自动启动"</p>
+</dd>
+<dt class="hdlist1">disable</dt>
+<dd>
+<p>撤销这些单元的"开机时自动启动"以及"插入某个硬件时自动启动"</p>
+</dd>
+<dt class="hdlist1">mask</dt>
+<dd>
+<p>屏蔽指定的单元或单元实例(禁用)</p>
+</dd>
+<dt class="hdlist1">unmask</dt>
+<dd>
+<p>解除对指定单元或单元实例的屏蔽，这是 mask 命令的反动作</p>
+</dd>
+<dt class="hdlist1">edit</dt>
+<dd>
+<p>调用文本编辑器(参见下面的"环境变量"小节) 修改 指定的单元或单元实例。</p>
+</dd>
+<dt class="hdlist1">list-jobs</dt>
+<dd>
+<p>列出正在运行中的任务。</p>
+</dd>
+<dt class="hdlist1">daemon-reload</dt>
+<dd>
+<p>重新加载 systemd 守护进程的配置</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_配置_service">19.1.7. 配置 <code>.service</code></h4>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Description=</dt>
+<dd>
+<p>有利于人类阅读的、对单元进行简单描述的字符串</p>
+</dd>
+<dt class="hdlist1">Documentation=</dt>
+<dd>
+<p>一组用空格分隔的文档URI列表， 这些文档是对此单元的详细说明</p>
+</dd>
+<dt class="hdlist1">Before=a</dt>
+<dd>
+<p>此服务在a服务之前启动</p>
+</dd>
+<dt class="hdlist1">After=a</dt>
+<dd>
+<p>此服务在a服务之后启动</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_配置_timer">19.1.8. 配置 <code>.timer</code></h4>
+<div class="listingblock">
+<div class="title">service.timer</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">[Unit] # 定义元数据
+[Timer] #定义定时器
+OnActiveSec：定时器生效后，多少时间开始执行任务
+OnBootSec：系统启动后，多少时间开始执行任务
+OnStartupSec：Systemd 进程启动后，多少时间开始执行任务
+OnUnitActiveSec：该单元上次执行后，等多少时间再次执行
+OnUnitInactiveSec： 定时器上次关闭后多少时间，再次执行
+OnCalendar：基于绝对时间，而不是相对时间执行,用于和 crond 类似的定时任务 ,以实际时间执行。
+AccuracySec：如果因为各种原因，任务必须推迟执行，推迟的最大秒数，默认是60秒
+Unit：真正要执行的任务，默认是同名的带有.service后缀的单元
+Persistent：如果设置了该字段，即使定时器到时没有启动，也会自动执行相应的单元
+WakeSystem：如果系统休眠，是否自动唤醒系统</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">时间后缀</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">systemd 在解析时长字符串(用于赋值)的时候， 接受与时长的显示类似的语法，不同之处在于可以省略空格。 可以理解的时间单位如下：
+
+usec, us, µs
+
+(微秒)
+msec, ms
+
+(毫秒)
+seconds, second, sec, s
+
+(秒)
+minutes, minute, min, m
+
+(分钟)
+hours, hour, hr, h
+
+(小时)
+days, day, d
+
+(天)
+weeks, week, w
+
+(星期)
+months, month, M
+
+(月)[=30.44天]
+years, year, y
+
+(年)[=365.25天]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ulimit">19.1.9. Ulimit</h4>
+<div class="paragraph">
+<p>ulimit 用于限制启动进程所占用的资源</p>
+</div>
+<div class="listingblock">
+<div class="title">实例</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[root@localhost ~]# ulimit -a
+core file size          (blocks, -c) 0           #core文件的最大值为100 blocks。
+data seg size           (kbytes, -d) unlimited   #进程的数据段可以任意大。
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited   #文件可以任意大。
+pending signals                 (-i) 98304       #最多有98304个待处理的信号。
+max locked memory       (kbytes, -l) 32          #一个任务锁住的物理内存的最大值为32KB。
+max memory size         (kbytes, -m) unlimited   #一个任务的常驻物理内存的最大值。
+open files                      (-n) 1024        #一个任务最多可以同时打开1024的文件。
+pipe size            (512 bytes, -p) 8           #管道的最大空间为4096字节。
+POSIX message queues     (bytes, -q) 819200      #POSIX的消息队列的最大值为819200字节。
+real-time priority              (-r) 0
+stack size              (kbytes, -s) 10240       #进程的栈的最大值为10240字节。
+cpu time               (seconds, -t) unlimited   #进程使用的CPU时间。
+max user processes              (-u) 98304       #当前用户同时打开的进程（包括线程）的最大个数为98304。
+virtual memory          (kbytes, -v) unlimited   #没有限制进程的最大地址空间。
+file locks                      (-x) unlimited   #所能锁住的文件的最大个数没有限制。</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>include::book/
+include::book/</p>
+</div>
 </div>
 </div>
 </div>
@@ -5089,12 +5653,16 @@ EOF</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-04-28 15:03:15 +0800
+Last updated 2021-05-17 16:00:14 +0800
 </div>
 </div>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
-<script>hljs.initHighlighting()</script>
+<script src="js/highlight.min.js"></script>
+<script>
+if (!hljs.initHighlighting.called) {
+  hljs.initHighlighting.called = true
+  ;[].slice.call(document.querySelectorAll('pre.highlight > code')).forEach(function (el) { hljs.highlightBlock(el) })
+}
+</script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   messageStyle: "none",
@@ -5111,13 +5679,13 @@ MathJax.Hub.Config({
 })
 MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
   MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
-    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains('stemblock')) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
       data.math.root.display = "block"
     }
     return data
   })
 })
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+<script src="js/MathJax/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>
