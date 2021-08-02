@@ -5334,6 +5334,28 @@ chmod 777 /etc/elasticsearch/elastic-certificates.p12</pre>
 <pre>/usr/share/elasticsearch/bin/elasticsearch-setup-passwords interactive</pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="title">创建超级用户赋予权限</div>
+<div class="content">
+<pre>curl -XPOST -H 'Content-type: application/json' -u elastic:thcl12 'http://192.168.102.11:9200/_xpack/security/user/thcl?pretty' -d '{
+  "password" : "superthcl",
+  "full_name" : "thcl",
+  "roles" : ["admin"],
+  "email" : "thcl@thcl.com"
+}'
+
+curl -XPOST -H 'Content-type: application/json' -u elastic:thcl12 'http://192.168.102.11:9200/_xpack/security/role/admin?pretty' -d '{
+   "run_as": [ "thcl" ],
+   "cluster": [ "all" ],
+   "indices": [
+     {
+       "names": [ "*" ],
+       "privileges": [ "all" ]
+     }
+   ]
+ }'</pre>
+</div>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
