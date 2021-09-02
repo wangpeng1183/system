@@ -978,6 +978,7 @@ p { margin-bottom: 1.25rem; }
 <li><a href="#_结构化查询">14.1.3. 结构化查询</a></li>
 <li><a href="#_查询与过滤">14.1.4. 查询与过滤</a></li>
 <li><a href="#_es集群搭建">14.1.5. es集群搭建</a></li>
+<li><a href="#_创建索引时设置分片数和副本数默认为51">14.1.6. 创建索引时设置分片数和副本数(默认为5，1)</a></li>
 </ul>
 </li>
 </ul>
@@ -5068,6 +5069,16 @@ PLAY RECAP ****************************************************
 <div class="sect3">
 <h4 id="_基础使用">14.1.1. 基础使用</h4>
 <div class="listingblock">
+<div class="title">ELK安装包下载</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">https://artifacts.elastic.co/downloads/kibana/kibana-7.8.0-x86_64.rpm
+
+https://artifacts.elastic.co/downloads/elasticsearch/kibana-7.8.0-x86_64.rpm
+
+https://artifacts.elastic.co/downloads/logstash/logstash-7.8.0-x86_64.rpm</code></pre>
+</div>
+</div>
+<div class="listingblock">
 <div class="title">测试</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl 'http://localhost:9200/?pretty'</code></pre>
@@ -5458,6 +5469,29 @@ curl -XPOST -H 'Content-type: application/json' -u elastic:thcl12 'http://192.16
      }
    ]
  }'</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_创建索引时设置分片数和副本数默认为51">14.1.6. 创建索引时设置分片数和副本数(默认为5，1)</h4>
+<div class="listingblock">
+<div class="content">
+<pre>curl -u elastic:password -H 'Content-Type: application/json' -XPUT 'http://localhost:9200/movesss' -d'
+{
+  "settings" : {
+    "index" : {
+      "number_of_shards" : 5,
+      "number_of_replicas" : 1
+    }
+  }
+}
+'</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">查看所有索引</div>
+<div class="content">
+<pre>curl -u elastic:password 'http://127.0.0.1:9200/_cat/indices?v'</pre>
 </div>
 </div>
 <div style="page-break-after: always;"></div>
