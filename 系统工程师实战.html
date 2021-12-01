@@ -998,38 +998,6 @@ p { margin-bottom: 1.25rem; }
 </li>
 </ul>
 </li>
-<li><a href="#_lsof">16. lsof</a>
-<ul class="sectlevel3">
-<li><a href="#_变量">16.1. 变量</a></li>
-<li><a href="#_传参">16.2. 传参</a></li>
-<li><a href="#_运算符">16.3. 运算符</a></li>
-<li><a href="#_vim">16.4. vim</a></li>
-<li><a href="#_systemctl">16.5. Systemctl</a></li>
-<li><a href="#_systemctl_参数">16.6. <code>systemctl</code> 参数</a></li>
-<li><a href="#_配置_service">16.7. 配置 <code>.service</code></a></li>
-<li><a href="#_配置_timer">16.8. 配置 <code>.timer</code></a></li>
-<li><a href="#_ulimit">16.9. Ulimit</a></li>
-</ul>
-</li>
-<li><a href="#_Archlinux_chapter">17. Archlinux</a>
-<ul class="sectlevel3">
-<li><a href="#_archlinux">17.1. Archlinux</a>
-<ul class="sectlevel4">
-<li><a href="#_新装系统终端无法打开">新装系统终端无法打开</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#_Kafka_chapter">18. Kafka</a>
-<ul class="sectlevel3">
-<li><a href="#_kafka">18.1. Kafka</a>
-<ul class="sectlevel4">
-<li><a href="#_kafka使用">kafka使用</a></li>
-<li><a href="#_配置">配置</a></li>
-</ul>
-</li>
-</ul>
-</li>
 </ul>
 </div>
 </div>
@@ -5575,6 +5543,18 @@ curl -u elastic:thcl12 -X PUT "192.168.102.81:9200/_snapshot/backup/test?wait_fo
 <pre>curl -u elastic:passwd -XPOST 'http://192.168.1.1:9200/index/_doc/_delete_by_query?refresh&amp;slices=5&amp;pretty' -H 'Content-Type: application/json' -d'{"query":{"bool":{"must":[{"range":{"DateTime":{"lt":"now-120d"}}}]}}}'</pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="title">查看所有index</div>
+<div class="content">
+<pre>curl -u elastic:passwd 'http://localhost:9200/_cat/indices?v'</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">删除文档</div>
+<div class="content">
+<pre>curl -u elastic:RKSVd3aLHzWOYvwrqwFk -XDELETE http://192.168.102.12:9200/device_binding/_doc/1</pre>
+</div>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -5751,12 +5731,11 @@ $last ::  获取最后一个数据
 == Nginx
 
 
-=== `Nginx`
+=== Nginx
 
 ==== 安装
 
-.添加源
-[source,bash]</pre>
+.添加源</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5781,7 +5760,7 @@ EOF</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>.安装</pre>
+<pre>.install</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5789,911 +5768,57 @@ EOF</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>&lt;&lt;&lt;
-[[_Iptables_chapter]]
-== Iptables
-
-
-=== `Iptables
-
-==== 安装</pre>
+<pre>.页面字符串替换 压缩</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>#压缩
+gzip on;
+gzip_comp_level 2;
+gzip_types text/plain application/octet-stream application/javascript application/x-javascript text/css application/xml text/javascript image/jpeg image/gif image/png font/ttf font/x-woff;
+gzip_vary on;</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>   location / {
+   sub_filter 'xxxxx1111'  'ooooo2222';
+   sub_filter_once off;
+   sub_filter_last_modified on;
+sub_filter_types *;
+proxy_set_header Accept-Encoding '';
+proxy_pass http://127.0.0.1:8000;
+   }</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.Ninx-TCP连接转发</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>yum install -y iptables-services</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.停止firewalld</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>systemctl  stop  firewalld</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.禁用firewalld</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>systemctl mask firewalld.service</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.iptables 开机自起</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>systemctl enable iptables.service</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.删除所有的链条和规则</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>iptables -F</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.启用仓库源</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>yum-config-manager --enable repository…</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.禁用仓库源</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>yum-config-manager --disable repository…</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.显示己安装的仓库源</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>yum repolist all</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>==== 保存规则
-.保存规则到文件</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>iptables-save &gt; /etc/sysconfig/iptables</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.保存规则</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>service iptables save</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>==== 使用
-.开放4545端口</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>iptables -I  INPUT -p tcp --dport 4545 -j ACCEPT</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.开放指定IP端口</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>iptables -I  INPUT -p tcp -s 47.108.220.208 --dport 8080 -j ACCEPT</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.开放50000-60000端口</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>iptables -I INPUT -p tcp --dport 50000:60000 -j ACCEPT</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>参数解释 +
--I 插入一条新的规则 +
--A 追加 +
--D 删除规则 +
--L 列出所有的规则链条 +
--F 删除所有的规则链条 +
--N 创建新的链条 +
--p 指定协议（tcp,upd） +
---dport 目标端口  +
--j 指定是 ACCEPT 接收 或者 DROP 不接收
-
-.开放ping</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>iptables -I INPUT -p icmp -j ACCEPT</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.允许本地回环</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>iptables -I INPUT -i lo -j ACCEPT</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.列出规则和相对应的编号</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>iptables -L -n --line-number</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.删除对应链的规则</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>iptables -D OUTPUT 1</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.配置默认的不让进</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>tables -P INPUT DROP</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.默认的不允许转发</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>iptables -P FORWARD DROP</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.默认的可以出去</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>iptables -P OUTPUT ACCEPT</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.阻止Windows蠕虫的攻击</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>iptables -I INPUT -j DROP -p tcp -s 0.0.0.0/0 -m string --algo kmp --string "cmd.exe"</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.防止SYN洪水攻击</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>iptables -A INPUT -p tcp --syn -m limit --limit 5/second -j ACCEPT</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.保存规则到配置文件中
-
-[source,bash]</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>cp /etc/sysconfig/iptables /etc/sysconfig/iptables.bak .任何改动之前先备份，请保持这一优秀的习惯
-iptables-save &gt; /etc/sysconfig/iptables
-cat /etc/sysconfig/iptables</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>https://wangchujiang.com/linux-command/c/iptables.html[Iptables详解]
-
-
-&lt;&lt;&lt;
-[[_Git_chapter]]
-== Git
-
-
-=== Git
-
-
-==== 新建分支推送到远程服务器
-
-.查看远程分支</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>git branch -a</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.将远程主机的更新，全部取回本地</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>git fetch</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.再次查看远程分支：</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>git branch -a</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.然后拉取远程分支到本地</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>git checkout -b 远程分支名 origin/远程分支名</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.新建一个本地分支</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>git checkout -b name</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.把新建的本地分支push到远程服务器</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>git push origin name:name</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>&lt;&lt;&lt;
-[[_Linux_chapter]]
-== Linux
-
-
-=== Linux系统相关
-
-.Linux显示线程限制</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>ulimit -n</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.列出系统打开的文件</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_lsof">16. lsof</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="title">筛选</div>
-<div class="content">
-<pre>lsof -c java| awk '{print $4}' |grep "^[0-9]" |wc -l</pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">-c</dt>
-<dd>
-<p>根据程序筛选</p>
-</dd>
-<dt class="hdlist1">-p</dt>
-<dd>
-<p>根据线程筛选</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p><a href="https://cloud.tencent.com/developer/article/1574630">lsof详解</a></p>
-</div>
-<div class="listingblock">
-<div class="title">生成UUID</div>
-<div class="content">
-<pre>uuidgen enp1s0</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">排序去重</div>
-<div class="content">
-<pre>cat device_yu_name.txt |sort |uniq -c</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">更改系统日志级别</div>
-<div class="content">
-<pre>echo 'LogLevel=debug' &gt;&gt; /etc/systemd/system.conf</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">最大可以打开的文件</div>
-<div class="content">
-<pre>cat /etc/security/limits.conf</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">禁用SELINUX，必须重启才能生效</div>
-<div class="content">
-<pre>echo SELINUX=disabled&gt;/etc/selinux/config</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>echo SELINUXTYPE=targeted&gt;&gt;/etc/selinux/config</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">bz2文件解压</div>
-<div class="content">
-<pre>yum install bzip2` +</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>bzip2 -d name.bz2</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.更新动态链接库</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>ldconfig</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>.service服务增加文件限制</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>LimitNOFILE=65535`
-==== shell</p>
-</div>
-<div class="sect3">
-<h4 id="_变量">16.1. 变量</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">your_name="qinjx"
-echo $your_name
-echo ${your_name}
-
-#只读变量
-myUrl="http://www.google.com"
-readonly myUrl
-myUrl="http://www.runoob.com"
-
-
-#删除变量
-#变量被删除后不能再次使用。unset 命令不能删除只读变量。
-unset myUrl
-
-
-
-#多行注释
-#EOF可换
-:&lt;&lt;EOF
-注释内容...
-注释内容...
-注释内容...
-EOF</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_传参">16.2. 传参</h4>
-<div class="dlist">
-<div class="title">参数解释</div>
-<dl>
-<dt class="hdlist1">$#</dt>
-<dd>
-<p>传递到脚本的参数个数</p>
-</dd>
-<dt class="hdlist1">$*</dt>
-<dd>
-<p>以一个单字符串显示所有向脚本传递的参数。如"$*"用「"」括起来的情况、以"$1 $2 … $n"的形式输出所有参数。</p>
-</dd>
-<dt class="hdlist1">$$</dt>
-<dd>
-<p>脚本运行的当前进程ID号</p>
-</dd>
-<dt class="hdlist1">$!</dt>
-<dd>
-<p>后台运行的最后一个进程的ID号</p>
-</dd>
-<dt class="hdlist1">$@</dt>
-<dd>
-<p>与$*相同，但是使用时加引号，并在引号中返回每个参数。如"$@"用「"」括起来的情况、以"$1" "$2" … "$n" 的形式输出所有参数。</p>
-</dd>
-<dt class="hdlist1">$-</dt>
-<dd>
-<p>显示Shell使用的当前选项，与set命令功能相同。</p>
-</dd>
-<dt class="hdlist1">$?</dt>
-<dd>
-<p>显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。</p>
-</dd>
-</dl>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>$* 与 $@ 区别<br>
-相同点：都是引用所有参数<br>
-不同点：只有在双引号中体现出来。假设在脚本运行时写了三个参数 1、2、3，，则 " * " 等价于 "1 2 3"（传递了一个参数），而 "@" 等价于 "1" "2" "3"（传递了三个参数）。</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_运算符">16.3. 运算符</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">-eq	检测两个数是否相等，相等返回 true。	                [ $a -eq $b ] 返回 false。
--ne	检测两个数是否不相等，不相等返回 true。	            [ $a -ne $b ] 返回 true。
--gt	检测左边的数是否大于右边的，如果是，则返回 true。	[ $a -gt $b ] 返回 false。
--lt	检测左边的数是否小于右边的，如果是，则返回 true。	[ $a -lt $b ] 返回 true。
--ge	检测左边的数是否大于等于右边的，如果是，则返回 true。	[ $a -ge $b ] 返回 false。
--le	检测左边的数是否小于等于右边的，如果是，则返回 true。	[ $a -le $b ] 返回 true。
-
-
-!	非运算，表达式为 true 则返回 false，否则返回 true。	[ ! false ] 返回 true。
--o	或运算，有一个表达式为 true 则返回 true。	        [ $a -lt 20 -o $b -gt 100 ] 返回 true。
--a	与运算，两个表达式都为 true 才返回 true。	        [ $a -lt 20 -a $b -gt 100 ] 返回 false。</code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-条件表达式要放在方括号之间，并且要有空格，例如: [$a==$b] 是错误的，必须写成 [ $a == $b ]。
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_vim">16.4. vim</h4>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">0 或功能键[Home]</dt>
-<dd>
-<p>这是数字“ 0 ”:移动到这一列的最前面字符处 (常用)</p>
-</dd>
-<dt class="hdlist1">$ 或功能键[End]</dt>
-<dd>
-<p>移动到这一列的最后面字符处(常用</p>
-</dd>
-<dt class="hdlist1">G</dt>
-<dd>
-<p>移动到这个文件的最后一列(常用)</p>
-</dd>
-<dt class="hdlist1">gg</dt>
-<dd>
-<p>移动到这个文件的第一列,相当于 1G 啊! (常用)</p>
-</dd>
-<dt class="hdlist1">n&lt;Enter&gt;</dt>
-<dd>
-<p>为数字。光标向下移动 n 列(常用)</p>
-</dd>
-<dt class="hdlist1">x, X</dt>
-<dd>
-<p>在一列字当中,x 为向后删除一个字符
-[backspace] 亦即是倒退键) (常用)相当于[del]按键), X为向前删除一个字符</p>
-</dd>
-<dt class="hdlist1">nx</dt>
-<dd>
-<p>n 为数字,连续向后删除 n 个字符。举例来说,我要连续删除 10 个字符, “10x”。</p>
-</dd>
-<dt class="hdlist1">dd</dt>
-<dd>
-<p>删除光标所在的那一整列(常用)</p>
-</dd>
-<dt class="hdlist1">u</dt>
-<dd>
-<p>复原前一个动作。(常用)</p>
-</dd>
-<dt class="hdlist1">ndd</dt>
-<dd>
-<p>n 为数字。删除光标所在的向下 n 列,例如 20dd 则是删除 20 列 (常用)</p>
-</dd>
-<dt class="hdlist1">H</dt>
-<dd>
-<p>光标移动到这个屏幕的最上方那一列的第一个字符</p>
-</dd>
-<dt class="hdlist1">M</dt>
-<dd>
-<p>光标移动到这个屏幕的中央那一列的第一个字符</p>
-</dd>
-<dt class="hdlist1">L</dt>
-<dd>
-<p>光标移动到这个屏幕的最下方那一列的第一个字符</p>
-</dd>
-</dl>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_systemctl">16.5. Systemctl</h4>
-
-</div>
-<div class="sect3">
-<h4 id="_systemctl_参数">16.6. <code>systemctl</code> 参数</h4>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">list-units</dt>
-<dd>
-<p>列出 systemd 当前已加载到内存中的单元</p>
-</dd>
-<dt class="hdlist1">list-timers</dt>
-<dd>
-<p>列出当前已加载到内存中的定时器(timer)单元，并按照下次执行的时间点排序</p>
-</dd>
-<dt class="hdlist1">is-active</dt>
-<dd>
-<p>检查指定的单元中， 是否有处于活动(active)状态的单元</p>
-</dd>
-<dt class="hdlist1">cat</dt>
-<dd>
-<p>显示指定单元的单元文件内容</p>
-</dd>
-<dt class="hdlist1">list-dependencies</dt>
-<dd>
-<p>显示单元的依赖关系</p>
-</dd>
-<dt class="hdlist1">enable</dt>
-<dd>
-<p>设为"开机时自动启动"或"插入某个硬件时自动启动"</p>
-</dd>
-<dt class="hdlist1">disable</dt>
-<dd>
-<p>撤销这些单元的"开机时自动启动"以及"插入某个硬件时自动启动"</p>
-</dd>
-<dt class="hdlist1">mask</dt>
-<dd>
-<p>屏蔽指定的单元或单元实例(禁用)</p>
-</dd>
-<dt class="hdlist1">unmask</dt>
-<dd>
-<p>解除对指定单元或单元实例的屏蔽，这是 mask 命令的反动作</p>
-</dd>
-<dt class="hdlist1">edit</dt>
-<dd>
-<p>调用文本编辑器(参见下面的"环境变量"小节) 修改 指定的单元或单元实例。</p>
-</dd>
-<dt class="hdlist1">list-jobs</dt>
-<dd>
-<p>列出正在运行中的任务。</p>
-</dd>
-<dt class="hdlist1">daemon-reload</dt>
-<dd>
-<p>重新加载 systemd 守护进程的配置</p>
-</dd>
-</dl>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_配置_service">16.7. 配置 <code>.service</code></h4>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Description=</dt>
-<dd>
-<p>有利于人类阅读的、对单元进行简单描述的字符串</p>
-</dd>
-<dt class="hdlist1">Documentation=</dt>
-<dd>
-<p>一组用空格分隔的文档URI列表， 这些文档是对此单元的详细说明</p>
-</dd>
-<dt class="hdlist1">Before=a</dt>
-<dd>
-<p>此服务在a服务之前启动</p>
-</dd>
-<dt class="hdlist1">After=a</dt>
-<dd>
-<p>此服务在a服务之后启动</p>
-</dd>
-</dl>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_配置_timer">16.8. 配置 <code>.timer</code></h4>
-<div class="listingblock">
-<div class="title">service.timer</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">[Unit] # 定义元数据
-[Timer] #定义定时器
-OnActiveSec：定时器生效后，多少时间开始执行任务
-OnBootSec：系统启动后，多少时间开始执行任务
-OnStartupSec：Systemd 进程启动后，多少时间开始执行任务
-OnUnitActiveSec：该单元上次执行后，等多少时间再次执行
-OnUnitInactiveSec： 定时器上次关闭后多少时间，再次执行
-OnCalendar：基于绝对时间，而不是相对时间执行,用于和 crond 类似的定时任务 ,以实际时间执行。
-AccuracySec：如果因为各种原因，任务必须推迟执行，推迟的最大秒数，默认是60秒
-Unit：真正要执行的任务，默认是同名的带有.service后缀的单元
-Persistent：如果设置了该字段，即使定时器到时没有启动，也会自动执行相应的单元
-WakeSystem：如果系统休眠，是否自动唤醒系统</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">时间后缀</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">systemd 在解析时长字符串(用于赋值)的时候， 接受与时长的显示类似的语法，不同之处在于可以省略空格。 可以理解的时间单位如下：
-
-usec, us, µs
-
-(微秒)
-msec, ms
-
-(毫秒)
-seconds, second, sec, s
-
-(秒)
-minutes, minute, min, m
-
-(分钟)
-hours, hour, hr, h
-
-(小时)
-days, day, d
-
-(天)
-weeks, week, w
-
-(星期)
-months, month, M
-
-(月)[=30.44天]
-years, year, y
-
-(年)[=365.25天]</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">移除状态为faild的任务，只是状态移除，服务本身不会被删除</div>
-<div class="content">
-<pre>systemctl reset-faild</pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_ulimit">16.9. Ulimit</h4>
-<div class="paragraph">
-<p>ulimit 用于限制启动进程所占用的资源</p>
-</div>
-<div class="listingblock">
-<div class="title">实例</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[root@localhost ~]# ulimit -a
-core file size          (blocks, -c) 0           #core文件的最大值为100 blocks。
-data seg size           (kbytes, -d) unlimited   #进程的数据段可以任意大。
-scheduling priority             (-e) 0
-file size               (blocks, -f) unlimited   #文件可以任意大。
-pending signals                 (-i) 98304       #最多有98304个待处理的信号。
-max locked memory       (kbytes, -l) 32          #一个任务锁住的物理内存的最大值为32KB。
-max memory size         (kbytes, -m) unlimited   #一个任务的常驻物理内存的最大值。
-open files                      (-n) 1024        #一个任务最多可以同时打开1024的文件。
-pipe size            (512 bytes, -p) 8           #管道的最大空间为4096字节。
-POSIX message queues     (bytes, -q) 819200      #POSIX的消息队列的最大值为819200字节。
-real-time priority              (-r) 0
-stack size              (kbytes, -s) 10240       #进程的栈的最大值为10240字节。
-cpu time               (seconds, -t) unlimited   #进程使用的CPU时间。
-max user processes              (-u) 98304       #当前用户同时打开的进程（包括线程）的最大个数为98304。
-virtual memory          (kbytes, -v) unlimited   #没有限制进程的最大地址空间。
-file locks                      (-x) unlimited   #所能锁住的文件的最大个数没有限制。</code></pre>
-</div>
-</div>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_Archlinux_chapter">17. Archlinux</h2>
-<div class="sectionbody">
-<div class="sect3">
-<h4 id="_archlinux">17.1. Archlinux</h4>
-<div class="sect4">
-<h5 id="_新装系统终端无法打开">新装系统终端无法打开</h5>
-<div class="listingblock">
-<div class="content">
-<pre>localedef -f UTF-8 -i en_US en_US.UTF-8</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">tty终端无法打开</div>
-<div class="content">
-<pre>systemctl start getty@tty1</pre>
-</div>
-</div>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_Kafka_chapter">18. Kafka</h2>
-<div class="sectionbody">
-<div class="sect3">
-<h4 id="_kafka">18.1. Kafka</h4>
-<div class="sect4">
-<h5 id="_kafka使用">kafka使用</h5>
-<div class="listingblock">
-<div class="title">删除topic</div>
-<div class="content">
-<pre>kafka-topics.sh --delete --zookeeper hadoop01:2181 hadoop02:2181 hadoop03:2181 --topic</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">修改topic的offset</div>
-<div class="content">
-<pre>kafka-consumer-groups.sh --bootstrap-server 192.168.102.12:9092 --group rtd --reset-offsets --topic rtdReceive --to-offset 0 --execute</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">查询消费组</div>
-<div class="content">
-<pre>kafka-consumer-groups.sh --bootstrap-server {kafka连接地址} --list</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">删除消费组</div>
-<div class="content">
-<pre>kafka-consumer-groups.sh --bootstrap-server {kafka连接地址} --delete --group {消费组}</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">查看topic详细信息</div>
-<div class="content">
-<pre>kafka-topics.sh -zookeeper hadoop01:2181 hadoop02:2181 hadoop03:2181 -describe -topic dping</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">列出所有topic</div>
-<div class="content">
-<pre>kafka-topics.sh --list --zookeeper hadoop01:2181 hadoop02:2181 hadoop03:2181</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">发送消息</div>
-<div class="content">
-<pre>kafka-console-producer.sh --broker-list hadoop01:9092 hadoop02:9092 hadoop03:9092 --topic dping</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">查看消费组的消费情况</div>
-<div class="content">
-<pre>kafka-consumer-groups.sh --bootstrap-server hadoop01:9092 --describe --group thcl-consumer-group</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">创建topic</div>
-<div class="content">
-<pre>kafka-topics.sh --create --zookeeper hadoop01:2181 hadoop02:2181 hadoop03:2181 --replication-factor 4 --partitions 6 --topic test4replic</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">kafka单节点启动</div>
-<div class="content">
-<pre>kafka-server-start.sh -daemon /data/software/kafka_2.13-2.7.0/config/server.properties</pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Broker：消息中间件处理结点，一个Kafka节点就是一个broker，多个broker可以组成一个Kafka集群。<br>
-Topic：一类消息，例如page view日志、click日志等都可以以topic的形式存在，Kafka集群能够同时负责多个topic的分发。<br>
-Partition：topic物理上的分组，一个topic可以分为多个partition，每个partition是一个有序的队列。<br>
-Segment：partition物理上由多个segment组成，下面2.2和2.3有详细说明。<br>
-offset：每个partition都由一系列有序的、不可变的消息组成，这些消息被连续的追加到partition中。 partition中的每个消息都有一个连续的序列号叫做offset,用于partition唯一标识一条消息.
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="title">创建topic</div>
-<div class="content">
-<pre>kafka-topics.sh –zookeeper localhost:2181 –create –topic my-topic –partitions 1 –replication-factor 1 –config max.message.bytes=64000 –config flush.messages=1</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">创建topic后修改topic参数</div>
-<div class="content">
-<pre>kafka-configs.sh –zookeeper localhost:2181 –entity-type topics –entity-name my-topic –alter –add-config max.message.bytes=128000</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">查看topic的offset情况</div>
-<div class="content">
-<pre>kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list hadoop01:9092 --topic realTimeData</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">查看consumer group列表</div>
-<div class="content">
-<pre>kafka-consumer-groups.sh  --bootstrap-server hadoop01:9092 --list</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">查看分区情况，节点信息，复制情况</div>
-<div class="content">
-<pre>kafka-topics.sh  --topic realTimeData --describe --zookeeper hadoop01:2181 hadoop02:2181 hadoop03:2181</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>kafka修改topic的副本数</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">需要新建json文件increase-replication-factor.json
-{
-	"version": 1,
-	"partitions": [{
-			"topic": "aaad",
-			"partition": 0,
-			"replicas": [1, 3]
-		},
-		{
-			"topic": "aaad",
-			"partition": 1,
-			"replicas": [1, 2]
-		},
-		{
-			"topic": "aaad",
-			"partition": 2,
-			"replicas": [2, 3]
-		},
-		{
-			"topic": "aaad",
-			"partition": 3,
-			"replicas": [2, 3]
-		},
-		{
-			"topic": "aaad",
-			"partition": 4,
-			"replicas": [1, 3]
-		},
-		{
-			"topic": "aaad",
-			"partition": 5,
-			"replicas": [1, 2]
-		}
-	]
+<p>upstream tcp{
+    hash $remote_addr consistent;
+    server      ip:9000 max_fails=3 fail_timeout=10s;
 }
-然后执行命令
-kafka-reassign-partitions.sh --zookeeper node01:2181 node02:2181 node03:2181  --reassignment-json-file increase-replication-factor.json --execute --additional</code></pre>
+server{
+    listen 8000;
+    proxy_connect_timeout 20s;
+    proxy_timeout 5m;
+    proxy_pass tcp;
+}</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&lt;&lt;&lt;
+// include::book/17-Iptables/Iptables.asc[]
+// include::book/18-Git/Git.asc[]
+// include::book/19-Linux/Linux.asc[]
+// include::book/20-Archlinux/Archlinux.asc[]
+// include::book/21-Kafka/Kafka.asc[]</pre>
 </div>
 </div>
-</div>
-<div class="sect4">
-<h5 id="_配置">配置</h5>
-<div style="page-break-after: always;"></div>
 </div>
 </div>
 </div>
@@ -6701,7 +5826,7 @@ kafka-reassign-partitions.sh --zookeeper node01:2181 node02:2181 node03:2181  --
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-09-01 10:48:49 +0800
+Last updated 2021-12-01 15:50:05 +0800
 </div>
 </div>
 <script src="js/highlight.min.js"></script>
