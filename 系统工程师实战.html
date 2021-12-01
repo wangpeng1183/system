@@ -981,6 +981,11 @@ p { margin-bottom: 1.25rem; }
 <li><a href="#_创建索引时设置分片数和副本数默认为51">14.1.6. 创建索引时设置分片数和副本数(默认为5，1)</a></li>
 </ul>
 </li>
+<li><a href="#_es快照备份">14.2. ES快照备份</a>
+<ul class="sectlevel3">
+<li><a href="#_备份">14.2.1. 备份</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_MongoDB_chapter">15. MongoDB</a>
@@ -989,69 +994,35 @@ p { margin-bottom: 1.25rem; }
 <ul class="sectlevel3">
 <li><a href="#_安装_4">15.1.1. 安装</a></li>
 <li><a href="#_基本操作">15.1.2. 基本操作</a></li>
-<li><a href="#_条件查询">15.1.3. 条件查询</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#_Nginx_chapter">16. Nginx</a>
-<ul class="sectlevel2">
-<li><a href="#_nginx">16.1. <code>Nginx</code></a>
+<li><a href="#_lsof">16. lsof</a>
 <ul class="sectlevel3">
-<li><a href="#_安装_5">16.1.1. 安装</a></li>
+<li><a href="#_变量">16.1. 变量</a></li>
+<li><a href="#_传参">16.2. 传参</a></li>
+<li><a href="#_运算符">16.3. 运算符</a></li>
+<li><a href="#_vim">16.4. vim</a></li>
+<li><a href="#_systemctl">16.5. Systemctl</a></li>
+<li><a href="#_systemctl_参数">16.6. <code>systemctl</code> 参数</a></li>
+<li><a href="#_配置_service">16.7. 配置 <code>.service</code></a></li>
+<li><a href="#_配置_timer">16.8. 配置 <code>.timer</code></a></li>
+<li><a href="#_ulimit">16.9. Ulimit</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a href="#_Iptables_chapter">17. Iptables</a>
-<ul class="sectlevel2">
-<li><a href="#_iptables">17.1. `Iptables</a>
+<li><a href="#_Archlinux_chapter">17. Archlinux</a>
 <ul class="sectlevel3">
-<li><a href="#_安装_6">17.1.1. 安装</a></li>
-<li><a href="#_保存规则">17.1.2. 保存规则</a></li>
-<li><a href="#_使用">17.1.3. 使用</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#_Git_chapter">18. Git</a>
-<ul class="sectlevel2">
-<li><a href="#_git_2">18.1. Git</a>
-<ul class="sectlevel3">
-<li><a href="#_新建分支推送到远程服务器">18.1.1. 新建分支推送到远程服务器</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#_Linux_chapter">19. Linux</a>
-<ul class="sectlevel2">
-<li><a href="#_linux系统相关">19.1. Linux系统相关</a>
-<ul class="sectlevel3">
-<li><a href="#_变量">19.1.1. 变量</a></li>
-<li><a href="#_传参">19.1.2. 传参</a></li>
-<li><a href="#_运算符">19.1.3. 运算符</a></li>
-<li><a href="#_vim">19.1.4. vim</a></li>
-<li><a href="#_systemctl">19.1.5. Systemctl</a></li>
-<li><a href="#_systemctl_参数">19.1.6. <code>systemctl</code> 参数</a></li>
-<li><a href="#_配置_service">19.1.7. 配置 <code>.service</code></a></li>
-<li><a href="#_配置_timer">19.1.8. 配置 <code>.timer</code></a></li>
-<li><a href="#_ulimit">19.1.9. Ulimit</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#_Archlinux_chapter">20. Archlinux</a>
-<ul class="sectlevel3">
-<li><a href="#_archlinux">20.1. Archlinux</a>
+<li><a href="#_archlinux">17.1. Archlinux</a>
 <ul class="sectlevel4">
 <li><a href="#_新装系统终端无法打开">新装系统终端无法打开</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#_Kafka_chapter">21. Kafka</a>
+<li><a href="#_Kafka_chapter">18. Kafka</a>
 <ul class="sectlevel3">
-<li><a href="#_kafka">21.1. Kafka</a>
+<li><a href="#_kafka">18.1. Kafka</a>
 <ul class="sectlevel4">
 <li><a href="#_kafka使用">kafka使用</a></li>
 <li><a href="#_配置">配置</a></li>
@@ -5075,7 +5046,9 @@ PLAY RECAP ****************************************************
 
 https://artifacts.elastic.co/downloads/elasticsearch/kibana-7.8.0-x86_64.rpm
 
-https://artifacts.elastic.co/downloads/logstash/logstash-7.8.0-x86_64.rpm</code></pre>
+https://artifacts.elastic.co/downloads/logstash/logstash-7.8.0-x86_64.rpm
+
+https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.8.0-x86_64.rpm</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -5494,6 +5467,114 @@ curl -XPOST -H 'Content-type: application/json' -u elastic:thcl12 'http://192.16
 <pre>curl -u elastic:password 'http://127.0.0.1:9200/_cat/indices?v'</pre>
 </div>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_es快照备份">14.2. ES快照备份</h3>
+<div class="sect3">
+<h4 id="_备份">14.2.1. 备份</h4>
+<div class="listingblock">
+<div class="title">配置文件添加配置</div>
+<div class="content">
+<pre>echo "path.repo: /home/esuser/esbackup" &gt;&gt; /etc/elasticsearch/elasticsearch.yml</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">重启</div>
+<div class="content">
+<pre>systemctl restart elasticsearch.service</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">查看快照仓库列表</div>
+<div class="content">
+<pre>curl -X GET "node1:9200/_cat/repositories?v"</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">创建快照仓库 backup</div>
+<div class="content">
+<pre>curl -u elastic:thcl12 -X PUT "192.168.102.81:9200/_snapshot/backup?pretty" -H 'Content-Type: application/json' -d'
+{
+  "type": "fs",
+  "settings": {
+    "location": "/data/elasticsearch_back",
+    "max_snapshot_bytes_per_sec": "50mb",
+    "max_restore_bytes_per_sec": "50mb",
+    "compress": "true"
+  }
+}
+'</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+type: 仓库的类型名称，请求里都是fs，表示file system。<br>
+location: 仓库的地址，要与elasticsearch.yml配置文件相同，否则会报错<br>
+max_snapshot_bytes_per_sec: 指定数据从Elasticsearch到仓库（数据备份）的写入速度上限，默认是20mb/s<br>
+max_restore_bytes_per_sec: 指定数据从仓库到Elasticsearch（数据恢复）的写入速度上限，默认也是20mb/s
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">创建快照 test</div>
+<div class="content">
+<pre>curl -u elastic:thcl12 -X PUT "192.168.102.81:9200/_snapshot/backup/test"
+
+curl -u elastic:thcl12 -X PUT "192.168.102.81:9200/_snapshot/backup/test?wait_for_completion=true"
+
+#wait_for_completion 决定请求是在快照初始化后立即返回（默认）</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">恢复</div>
+<div class="content">
+<pre>curl -u elastic:thcl12 -X POST "192.168.102.81:9200/_snapshot/backup/test/_restore"</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">恢复指定索引</div>
+<div class="content">
+<pre>curl -u elastic:thcl12 -X POST "192.168.102.81:9200/_snapshot/backup/test/_restore" -H 'Content-Type: application/json' -d'
+{
+  "indices": "tocol-otis-gecb",
+  "ignore_unavailable": true,
+  "include_global_state": true,
+  "rename_pattern": "index_(.+)",
+  "rename_replacement": "restored_index_$1"
+}'</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">删除快照</div>
+<div class="content">
+<pre>curl -u elastic:thcl12 -X POST "192.168.102.81:9200/_snapshot/es_backup/test"</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">查看快照信息</div>
+<div class="content">
+<pre>curl -u elastic:thcl12 -X GET "192.168.102.81:9200/_snapshot/backup/test"</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">根据时间清理数据</div>
+<div class="content">
+<pre>curl -u elastic:passwd -XPOST 'http://192.168.1.1:9200/index/_doc/_delete_by_query?refresh&amp;slices=5&amp;pretty' -H 'Content-Type: application/json' -d'{"query": {"bool": {"must": [{"range": {"DropOffDateTime": {"lt": "2020-11-30 00:00:00"}}}]}}}'</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">清理120天前的数据</div>
+<div class="content">
+<pre>curl -u elastic:passwd -XPOST 'http://192.168.1.1:9200/index/_doc/_delete_by_query?refresh&amp;slices=5&amp;pretty' -H 'Content-Type: application/json' -d'{"query":{"bool":{"must":[{"range":{"DateTime":{"lt":"now-120d"}}}]}}}'</pre>
+</div>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -5537,456 +5618,471 @@ curl -XPOST -H 'Content-type: application/json' -u elastic:thcl12 'http://192.16
 <div class="listingblock">
 <div class="title">插入文档</div>
 <div class="content">
-<pre>db.users.insert({name:'zhangsan',age:18})` +</pre>
+<pre>db.users.insert({name:'zhangsan',age:18})` +
+db.users.save({name:'lisisi',age:16})</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>db.users.save({name:'lisisi',age:16})</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>[NOTE]
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
 insert和save方法都可以插入数据，当默认的“_id”值已存在时，调用insert方法插入会报错；而save方法不会,会更新相同的_id所在行数据的信息。
-
-
-.删除文档</pre>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">删除文档</div>
+<div class="content">
+<pre>db.users.remove({'name':'zhangsan'})` +</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>db.users.remove({'name':'zhangsan'})`<br></p>
+<p>db.collection.drop()</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>db.collection.drop()</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">修改文档</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">db.users.update({'name':'zhangsan'},{$set:{'name':'wanger'}})
-
-#修改多条相同的文档，需要设置 multi 参数为 true
-db.collection_name.update({"字段名":"字段值"},{$set:{"要修改的字段名":"修改后的字段值"}},{multi:true})</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">查询文档</div>
-<div class="content">
-<pre>db.collection.find(query, projection)</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">易读方式</div>
-<div class="content">
-<pre>db.collection.find(query, projection).pretty()</pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_条件查询">15.1.3. 条件查询</h4>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">等于 </dt>
-<dd>
-<p>db.col.find({"by":"root"}).pretty()</p>
-</dd>
-<dt class="hdlist1">lt 小于 </dt>
-<dd>
-<p>db.col.find({"likes":{$lt:50}}).pretty()</p>
-</dd>
-<dt class="hdlist1">lte 小于或等于 </dt>
-<dd>
-<p>db.col.find({"likes":{$lte:50}}).pretty()</p>
-</dd>
-<dt class="hdlist1">gt 大于 </dt>
-<dd>
-<p>db.col.find({"likes":{$gt:50}}).pretty()</p>
-</dd>
-<dt class="hdlist1">gte 大于或等于 </dt>
-<dd>
-<p>db.col.find({"likes":{$gte:50}}).pretty()</p>
-</dd>
-<dt class="hdlist1">ne 不等于 </dt>
-<dd>
-<p>db.col.find({"likes":{$ne:50}}).pretty()</p>
-</dd>
-<dt class="hdlist1">and </dt>
-<dd>
-<p>db.col.find({key1:value1, key2:value2}).pretty()</p>
-</dd>
-<dt class="hdlist1">or </dt>
-<dd>
-<p>db.col.find({$or: [{key1: value1}, {key2:value2}]}).pretty()</p>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="title">Limit</div>
-<div class="content">
-<pre>db.col.find().limit(NUMBER)</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">skip 跳过数据读取</div>
-<div class="content">
-<pre>db.col.find({},{"title":1,_id:0}).limit(1).skip(1)</pre>
+<pre>.修改文档
+[source,bash]</pre>
 </div>
 </div>
 <div class="paragraph">
-<div class="title">排序</div>
-<p>1：升序，-1：降序<br></p>
+<p>db.users.update({'name':'zhangsan'},{$set:{'name':'wanger'}})</p>
+</div>
+<div class="paragraph">
+<p>#修改多条相同的文档，需要设置 multi 参数为 true
+db.collection_name.update({"字段名":"字段值"},{$set:{"要修改的字段名":"修改后的字段值"}},{multi:true})</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>db.col.find().sort({KEY:1})</pre>
+<pre>.查询文档</pre>
 </div>
 </div>
-<div class="listingblock">
-<div class="title">索引</div>
-<div class="content">
-<pre>db.col.createIndex({"title":1})</pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">查看集合索引 </dt>
-<dd>
-<p>db.col.getIndexes()</p>
-</dd>
-<dt class="hdlist1">查看集合索引大小 </dt>
-<dd>
-<p>db.col.totalIndexSize()</p>
-</dd>
-<dt class="hdlist1">删除集合所有索引 </dt>
-<dd>
-<p>db.col.dropIndexes()</p>
-</dd>
-<dt class="hdlist1">删除集合指定索引 </dt>
-<dd>
-<p>db.col.dropIndex("索引名称")</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>db.collection.find(query, projection)</p>
 </div>
 <div class="listingblock">
-<div class="title">聚合</div>
 <div class="content">
-<pre>db.col.aggregate([{$group : {_id : "$by_user", num : {$sum : 1}}}])</pre>
+<pre>.易读方式</pre>
 </div>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">$sum </dt>
-<dd>
-<p>计算总和，{$sum: 1}表示返回总和×1的值(即总和的数量),使用{$sum: '$制定字段'}也能直接获取制定字段的值的总和</p>
-</dd>
-<dt class="hdlist1">$avg </dt>
-<dd>
-<p>求平均值</p>
-</dd>
-<dt class="hdlist1">$min </dt>
-<dd>
-<p>求min值</p>
-</dd>
-<dt class="hdlist1">$max </dt>
-<dd>
-<p>求max值</p>
-</dd>
-<dt class="hdlist1">$push </dt>
-<dd>
-<p>将结果文档中插入值到一个数组中</p>
-</dd>
-<dt class="hdlist1">$first </dt>
-<dd>
-<p>根据文档的排序获取第一个文档数据</p>
-</dd>
-<dt class="hdlist1">$last </dt>
-<dd>
-<p>获取最后一个数据</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>db.collection.find(query, projection).pretty()</p>
 </div>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_Nginx_chapter">16. Nginx</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_nginx">16.1. <code>Nginx</code></h3>
-<div class="sect3">
-<h4 id="_安装_5">16.1.1. 安装</h4>
 <div class="listingblock">
-<div class="title">添加源</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &lt;&lt; EOF &gt; /etc/yum.repos.d/nginx.repo
-[nginx-stable]
-name=nginx stable repo
+<pre>==== 条件查询
+等于 ::	db.col.find({"by":"root"}).pretty()
+lt 小于 :: db.col.find({"likes":{$lt:50}}).pretty()
+lte 小于或等于 :: db.col.find({"likes":{$lte:50}}).pretty()
+gt 大于 ::	db.col.find({"likes":{$gt:50}}).pretty()
+gte 大于或等于 :: db.col.find({"likes":{$gte:50}}).pretty()
+ne 不等于 :: db.col.find({"likes":{$ne:50}}).pretty()
+and :: db.col.find({key1:value1, key2:value2}).pretty()
+or :: db.col.find({$or: [{key1: value1}, {key2:value2}]}).pretty()
+
+.Limit</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>db.col.find().limit(NUMBER)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.skip 跳过数据读取</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>db.col.find({},{"title":1,_id:0}).limit(1).skip(1)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.排序
+1：升序，-1：降序 +</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>db.col.find().sort({KEY:1})</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.索引</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>db.col.createIndex({"title":1})</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>查看集合索引 :: db.col.getIndexes()
+查看集合索引大小 :: db.col.totalIndexSize()
+删除集合所有索引 :: db.col.dropIndexes()
+删除集合指定索引 :: db.col.dropIndex("索引名称")
+
+.聚合</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>db.col.aggregate([{$group : {_id : "$by_user", num : {$sum : 1}}}])</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$sum :: 计算总和，{$sum: 1}表示返回总和×1的值(即总和的数量),使用{$sum: '$制定字段'}也能直接获取制定字段的值的总和
+
+$avg :: 求平均值
+
+$min :: 求min值
+
+$max :: 求max值
+
+$push :: 将结果文档中插入值到一个数组中
+
+$first :: 根据文档的排序获取第一个文档数据
+
+$last ::  获取最后一个数据
+
+
+
+&lt;&lt;&lt;
+[[_Nginx_chapter]]
+== Nginx
+
+
+=== `Nginx`
+
+==== 安装
+
+.添加源
+[source,bash]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>cat &lt;&lt; EOF &gt; /etc/yum.repos.d/nginx.repo</p>
+</div>
+<div class="paragraph">
+<p>name=nginx stable repo
 baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
 gpgcheck=1
 enabled=1
 gpgkey=https://nginx.org/keys/nginx_signing.key
-module_hotfixes=true
-
-[nginx-mainline]
-name=nginx mainline repo
+module_hotfixes=true</p>
+</div>
+<div class="paragraph">
+<p>name=nginx mainline repo
 baseurl=http://nginx.org/packages/mainline/centos/$releasever/$basearch/
 gpgcheck=1
 enabled=0
 gpgkey=https://nginx.org/keys/nginx_signing.key
 module_hotfixes=true
-EOF</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">安装</div>
-<div class="content">
-<pre>yum install -y nginx</pre>
-</div>
-</div>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_Iptables_chapter">17. Iptables</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_iptables">17.1. `Iptables</h3>
-<div class="sect3">
-<h4 id="_安装_6">17.1.1. 安装</h4>
-<div class="listingblock">
-<div class="content">
-<pre>yum install -y iptables-services</pre>
-</div>
+EOF</p>
 </div>
 <div class="listingblock">
-<div class="title">停止firewalld</div>
 <div class="content">
-<pre>systemctl  stop  firewalld</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">禁用firewalld</div>
-<div class="content">
-<pre>systemctl mask firewalld.service</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">iptables 开机自起</div>
-<div class="content">
-<pre>systemctl enable iptables.service</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">删除所有的链条和规则</div>
-<div class="content">
-<pre>iptables -F</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">启用仓库源</div>
-<div class="content">
-<pre>yum-config-manager --enable repository…</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">禁用仓库源</div>
-<div class="content">
-<pre>yum-config-manager --disable repository…</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">显示己安装的仓库源</div>
-<div class="content">
-<pre>yum repolist all</pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_保存规则">17.1.2. 保存规则</h4>
-<div class="listingblock">
-<div class="title">保存规则到文件</div>
-<div class="content">
-<pre>iptables-save &gt; /etc/sysconfig/iptables</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">保存规则</div>
-<div class="content">
-<pre>service iptables save</pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_使用">17.1.3. 使用</h4>
-<div class="listingblock">
-<div class="title">开放4545端口</div>
-<div class="content">
-<pre>iptables -I  INPUT -p tcp --dport 4545 -j ACCEPT</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">开放指定IP端口</div>
-<div class="content">
-<pre>iptables -I  INPUT -p tcp -s 47.108.220.208 --dport 8080 -j ACCEPT</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">开放50000-60000端口</div>
-<div class="content">
-<pre>iptables -I INPUT -p tcp --dport 50000:60000 -j ACCEPT</pre>
+<pre>.安装</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>参数解释<br>
--I 插入一条新的规则<br>
--A 追加<br>
--D 删除规则<br>
--L 列出所有的规则链条<br>
--F 删除所有的规则链条<br>
--N 创建新的链条<br>
--p 指定协议（tcp,upd）<br>
---dport 目标端口 <br>
--j 指定是 ACCEPT 接收 或者 DROP 不接收</p>
+<p>yum install -y nginx</p>
 </div>
 <div class="listingblock">
-<div class="title">开放ping</div>
 <div class="content">
-<pre>iptables -I INPUT -p icmp -j ACCEPT</pre>
+<pre>&lt;&lt;&lt;
+[[_Iptables_chapter]]
+== Iptables
+
+
+=== `Iptables
+
+==== 安装</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>yum install -y iptables-services</p>
 </div>
 <div class="listingblock">
-<div class="title">允许本地回环</div>
 <div class="content">
-<pre>iptables -I INPUT -i lo -j ACCEPT</pre>
+<pre>.停止firewalld</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>systemctl  stop  firewalld</p>
 </div>
 <div class="listingblock">
-<div class="title">列出规则和相对应的编号</div>
 <div class="content">
-<pre>iptables -L -n --line-number</pre>
+<pre>.禁用firewalld</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>systemctl mask firewalld.service</p>
 </div>
 <div class="listingblock">
-<div class="title">删除对应链的规则</div>
 <div class="content">
-<pre>iptables -D OUTPUT 1</pre>
+<pre>.iptables 开机自起</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>systemctl enable iptables.service</p>
 </div>
 <div class="listingblock">
-<div class="title">配置默认的不让进</div>
 <div class="content">
-<pre>tables -P INPUT DROP</pre>
+<pre>.删除所有的链条和规则</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>iptables -F</p>
 </div>
 <div class="listingblock">
-<div class="title">默认的不允许转发</div>
 <div class="content">
-<pre>iptables -P FORWARD DROP</pre>
+<pre>.启用仓库源</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>yum-config-manager --enable repository…</p>
 </div>
 <div class="listingblock">
-<div class="title">默认的可以出去</div>
 <div class="content">
-<pre>iptables -P OUTPUT ACCEPT</pre>
+<pre>.禁用仓库源</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>yum-config-manager --disable repository…</p>
 </div>
 <div class="listingblock">
-<div class="title">阻止Windows蠕虫的攻击</div>
 <div class="content">
-<pre>iptables -I INPUT -j DROP -p tcp -s 0.0.0.0/0 -m string --algo kmp --string "cmd.exe"</pre>
+<pre>.显示己安装的仓库源</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>yum repolist all</p>
 </div>
 <div class="listingblock">
-<div class="title">防止SYN洪水攻击</div>
 <div class="content">
-<pre>iptables -A INPUT -p tcp --syn -m limit --limit 5/second -j ACCEPT</pre>
+<pre>==== 保存规则
+.保存规则到文件</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>iptables-save &gt; /etc/sysconfig/iptables</p>
 </div>
 <div class="listingblock">
-<div class="title">保存规则到配置文件中</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cp /etc/sysconfig/iptables /etc/sysconfig/iptables.bak .任何改动之前先备份，请保持这一优秀的习惯
+<pre>.保存规则</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>service iptables save</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>==== 使用
+.开放4545端口</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>iptables -I  INPUT -p tcp --dport 4545 -j ACCEPT</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.开放指定IP端口</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>iptables -I  INPUT -p tcp -s 47.108.220.208 --dport 8080 -j ACCEPT</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.开放50000-60000端口</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>iptables -I INPUT -p tcp --dport 50000:60000 -j ACCEPT</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>参数解释 +
+-I 插入一条新的规则 +
+-A 追加 +
+-D 删除规则 +
+-L 列出所有的规则链条 +
+-F 删除所有的规则链条 +
+-N 创建新的链条 +
+-p 指定协议（tcp,upd） +
+--dport 目标端口  +
+-j 指定是 ACCEPT 接收 或者 DROP 不接收
+
+.开放ping</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>iptables -I INPUT -p icmp -j ACCEPT</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.允许本地回环</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>iptables -I INPUT -i lo -j ACCEPT</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.列出规则和相对应的编号</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>iptables -L -n --line-number</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.删除对应链的规则</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>iptables -D OUTPUT 1</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.配置默认的不让进</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>tables -P INPUT DROP</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.默认的不允许转发</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>iptables -P FORWARD DROP</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.默认的可以出去</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>iptables -P OUTPUT ACCEPT</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.阻止Windows蠕虫的攻击</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>iptables -I INPUT -j DROP -p tcp -s 0.0.0.0/0 -m string --algo kmp --string "cmd.exe"</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.防止SYN洪水攻击</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>iptables -A INPUT -p tcp --syn -m limit --limit 5/second -j ACCEPT</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.保存规则到配置文件中
+
+[source,bash]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>cp /etc/sysconfig/iptables /etc/sysconfig/iptables.bak .任何改动之前先备份，请保持这一优秀的习惯
 iptables-save &gt; /etc/sysconfig/iptables
-cat /etc/sysconfig/iptables</code></pre>
+cat /etc/sysconfig/iptables</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>https://wangchujiang.com/linux-command/c/iptables.html[Iptables详解]
+
+
+&lt;&lt;&lt;
+[[_Git_chapter]]
+== Git
+
+
+=== Git
+
+
+==== 新建分支推送到远程服务器
+
+.查看远程分支</pre>
 </div>
 </div>
 <div class="paragraph">
-<p><a href="https://wangchujiang.com/linux-command/c/iptables.html">Iptables详解</a></p>
+<p>git branch -a</p>
 </div>
-<div style="page-break-after: always;"></div>
+<div class="listingblock">
+<div class="content">
+<pre>.将远程主机的更新，全部取回本地</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>git fetch</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.再次查看远程分支：</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>git branch -a</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.然后拉取远程分支到本地</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>git checkout -b 远程分支名 origin/远程分支名</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.新建一个本地分支</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>git checkout -b name</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.把新建的本地分支push到远程服务器</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>git push origin name:name</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&lt;&lt;&lt;
+[[_Linux_chapter]]
+== Linux
+
+
+=== Linux系统相关
+
+.Linux显示线程限制</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>ulimit -n</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.列出系统打开的文件</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_Git_chapter">18. Git</h2>
+<h2 id="_lsof">16. lsof</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_git_2">18.1. Git</h3>
-<div class="sect3">
-<h4 id="_新建分支推送到远程服务器">18.1.1. 新建分支推送到远程服务器</h4>
-<div class="listingblock">
-<div class="title">查看远程分支</div>
-<div class="content">
-<pre>git branch -a</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">将远程主机的更新，全部取回本地</div>
-<div class="content">
-<pre>git fetch</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">再次查看远程分支：</div>
-<div class="content">
-<pre>git branch -a</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">然后拉取远程分支到本地</div>
-<div class="content">
-<pre>git checkout -b 远程分支名 origin/远程分支名</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">新建一个本地分支</div>
-<div class="content">
-<pre>git checkout -b name</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">把新建的本地分支push到远程服务器</div>
-<div class="content">
-<pre>git push origin name:name</pre>
-</div>
-</div>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_Linux_chapter">19. Linux</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_linux系统相关">19.1. Linux系统相关</h3>
-<div class="listingblock">
-<div class="title">Linux显示线程限制</div>
-<div class="content">
-<pre>ulimit -n</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">列出系统打开的文件</div>
-<div class="content">
-<pre>lsof</pre>
-</div>
-</div>
 <div class="listingblock">
 <div class="title">筛选</div>
 <div class="content">
@@ -6070,7 +6166,7 @@ cat /etc/sysconfig/iptables</code></pre>
 ==== shell</p>
 </div>
 <div class="sect3">
-<h4 id="_变量">19.1.1. 变量</h4>
+<h4 id="_变量">16.1. 变量</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">your_name="qinjx"
@@ -6100,7 +6196,7 @@ EOF</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_传参">19.1.2. 传参</h4>
+<h4 id="_传参">16.2. 传参</h4>
 <div class="dlist">
 <div class="title">参数解释</div>
 <dl>
@@ -6152,7 +6248,7 @@ EOF</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_运算符">19.1.3. 运算符</h4>
+<h4 id="_运算符">16.3. 运算符</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">-eq	检测两个数是否相等，相等返回 true。	                [ $a -eq $b ] 返回 false。
@@ -6182,7 +6278,7 @@ EOF</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_vim">19.1.4. vim</h4>
+<h4 id="_vim">16.4. vim</h4>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">0 或功能键[Home]</dt>
@@ -6242,11 +6338,11 @@ EOF</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_systemctl">19.1.5. Systemctl</h4>
+<h4 id="_systemctl">16.5. Systemctl</h4>
 
 </div>
 <div class="sect3">
-<h4 id="_systemctl_参数">19.1.6. <code>systemctl</code> 参数</h4>
+<h4 id="_systemctl_参数">16.6. <code>systemctl</code> 参数</h4>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">list-units</dt>
@@ -6301,7 +6397,7 @@ EOF</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_配置_service">19.1.7. 配置 <code>.service</code></h4>
+<h4 id="_配置_service">16.7. 配置 <code>.service</code></h4>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Description=</dt>
@@ -6324,7 +6420,7 @@ EOF</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_配置_timer">19.1.8. 配置 <code>.timer</code></h4>
+<h4 id="_配置_timer">16.8. 配置 <code>.timer</code></h4>
 <div class="listingblock">
 <div class="title">service.timer</div>
 <div class="content">
@@ -6376,9 +6472,15 @@ years, year, y
 (年)[=365.25天]</code></pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="title">移除状态为faild的任务，只是状态移除，服务本身不会被删除</div>
+<div class="content">
+<pre>systemctl reset-faild</pre>
+</div>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_ulimit">19.1.9. Ulimit</h4>
+<h4 id="_ulimit">16.9. Ulimit</h4>
 <div class="paragraph">
 <p>ulimit 用于限制启动进程所占用的资源</p>
 </div>
@@ -6408,12 +6510,11 @@ file locks                      (-x) unlimited   #所能锁住的文件的最大
 </div>
 </div>
 </div>
-</div>
 <div class="sect1">
-<h2 id="_Archlinux_chapter">20. Archlinux</h2>
+<h2 id="_Archlinux_chapter">17. Archlinux</h2>
 <div class="sectionbody">
 <div class="sect3">
-<h4 id="_archlinux">20.1. Archlinux</h4>
+<h4 id="_archlinux">17.1. Archlinux</h4>
 <div class="sect4">
 <h5 id="_新装系统终端无法打开">新装系统终端无法打开</h5>
 <div class="listingblock">
@@ -6433,10 +6534,10 @@ file locks                      (-x) unlimited   #所能锁住的文件的最大
 </div>
 </div>
 <div class="sect1">
-<h2 id="_Kafka_chapter">21. Kafka</h2>
+<h2 id="_Kafka_chapter">18. Kafka</h2>
 <div class="sectionbody">
 <div class="sect3">
-<h4 id="_kafka">21.1. Kafka</h4>
+<h4 id="_kafka">18.1. Kafka</h4>
 <div class="sect4">
 <h5 id="_kafka使用">kafka使用</h5>
 <div class="listingblock">
