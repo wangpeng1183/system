@@ -986,15 +986,29 @@ p { margin-bottom: 1.25rem; }
 <li><a href="#_备份">14.2.1. 备份</a></li>
 </ul>
 </li>
+<li><a href="#_kibana">14.3. Kibana</a>
+<ul class="sectlevel3">
+<li><a href="#_安装_4">14.3.1. 安装</a></li>
+<li><a href="#_配置">14.3.2. 配置</a></li>
+<li><a href="#_开机启动">14.3.3. 开机启动</a></li>
+<li><a href="#_启动服务_2">14.3.4. 启动服务</a></li>
+<li><a href="#_最后">14.3.5. 最后</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_MongoDB_chapter">15. MongoDB</a>
 <ul class="sectlevel2">
 <li><a href="#_mongodb">15.1. MongoDB</a>
 <ul class="sectlevel3">
-<li><a href="#_安装_4">15.1.1. 安装</a></li>
+<li><a href="#_安装_5">15.1.1. 安装</a></li>
 <li><a href="#_基本操作">15.1.2. 基本操作</a></li>
 <li><a href="#_条件查询">15.1.3. 条件查询</a></li>
+</ul>
+</li>
+<li><a href="#_主从">15.2. 主从</a>
+<ul class="sectlevel3">
+<li><a href="#_配置_2">15.2.1. 配置</a></li>
 </ul>
 </li>
 </ul>
@@ -1003,7 +1017,7 @@ p { margin-bottom: 1.25rem; }
 <ul class="sectlevel2">
 <li><a href="#_nginx">16.1. Nginx</a>
 <ul class="sectlevel3">
-<li><a href="#_安装_5">16.1.1. 安装</a></li>
+<li><a href="#_安装_6">16.1.1. 安装</a></li>
 </ul>
 </li>
 </ul>
@@ -1012,7 +1026,7 @@ p { margin-bottom: 1.25rem; }
 <ul class="sectlevel2">
 <li><a href="#_iptables">17.1. `Iptables</a>
 <ul class="sectlevel3">
-<li><a href="#_安装_6">17.1.1. 安装</a></li>
+<li><a href="#_安装_7">17.1.1. 安装</a></li>
 <li><a href="#_保存规则">17.1.2. 保存规则</a></li>
 <li><a href="#_使用">17.1.3. 使用</a></li>
 </ul>
@@ -1030,17 +1044,18 @@ p { margin-bottom: 1.25rem; }
 </li>
 <li><a href="#_Linux_chapter">19. Linux</a>
 <ul class="sectlevel2">
-<li><a href="#_linux系统相关">19.1. Linux系统相关</a>
+<li><a href="#_linux系统相关">19.1. Linux系统相关</a></li>
+<li><a href="#_shell">19.2. shell</a>
 <ul class="sectlevel3">
-<li><a href="#_变量">19.1.1. 变量</a></li>
-<li><a href="#_传参">19.1.2. 传参</a></li>
-<li><a href="#_运算符">19.1.3. 运算符</a></li>
-<li><a href="#_vim">19.1.4. vim</a></li>
-<li><a href="#_systemctl">19.1.5. Systemctl</a></li>
-<li><a href="#_systemctl_参数">19.1.6. <code>systemctl</code> 参数</a></li>
-<li><a href="#_配置_service">19.1.7. 配置 <code>.service</code></a></li>
-<li><a href="#_配置_timer">19.1.8. 配置 <code>.timer</code></a></li>
-<li><a href="#_ulimit">19.1.9. Ulimit</a></li>
+<li><a href="#_变量">19.2.1. 变量</a></li>
+<li><a href="#_传参">19.2.2. 传参</a></li>
+<li><a href="#_运算符">19.2.3. 运算符</a></li>
+<li><a href="#_vim">19.2.4. vim</a></li>
+<li><a href="#_systemctl">19.2.5. Systemctl</a></li>
+<li><a href="#_systemctl_参数">19.2.6. <code>systemctl</code> 参数</a></li>
+<li><a href="#_配置_service">19.2.7. 配置 <code>.service</code></a></li>
+<li><a href="#_配置_timer">19.2.8. 配置 <code>.timer</code></a></li>
+<li><a href="#_ulimit">19.2.9. Ulimit</a></li>
 </ul>
 </li>
 </ul>
@@ -1060,7 +1075,7 @@ p { margin-bottom: 1.25rem; }
 <ul class="sectlevel3">
 <li><a href="#_kafka使用">21.1.1. kafka使用</a>
 <ul class="sectlevel4">
-<li><a href="#_配置">配置</a></li>
+<li><a href="#_配置_3">配置</a></li>
 </ul>
 </li>
 </ul>
@@ -1283,6 +1298,107 @@ sed -i '150s/Hostname=/Hostname=yinxin/' /etc/zabbix/zabbix_agentd.conf[source,c
 </td>
 </tr>
 </table>
+</div>
+<div class="listingblock">
+<div class="title">企业微信</div>
+<div class="content">
+<pre>企业ID
+ww496d47cc707b7239
+AgentId
+1000003
+Secret
+ebxky-GfkJKXl_oOeKQ2zdw_P2lKLUYoRZ5g6FM0l24
+
+
+{ITEM.NAME}故障
+IP:{HOST.HOST}
+故障信息:{TRIGGER.NAME}
+监控取值:{ITEM.LASTVALUE}
+告警时间:{EVENT.DATE} {EVENT.TIME}
+
+
+主机:{HOST.NAME}故障
+地址:{HOSTNAME1}
+功能模块:{ITEM.NAME}
+监控取值:{ITEM.LASTVALUE}
+告警信息:{TRIGGER.NAME}
+告警时间:{EVENT.DATE} {EVENT.TIME}
+
+
+#!/bin/bash
+CorpID="ww496d47cc707b7239"                   #企业下面的CorpID
+Secret="ebxky-GfkJKXl_oOeKQ2zdw_P2lKLUYoRZ5g6FM0l24"            #创建的应用那有Secret
+GURL="https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$CorpID&amp;corpsecret=$Secret"
+Token=$(/usr/bin/curl -s -G $GURL |awk -F\": '{print $4}'|awk -F\" '{print $2}')
+#echo $Token
+PURL="https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=$Token"
+
+function body(){
+        local int agentid=1000003   #改为AgentId 在创建的应用那里看
+        local UserID=$1             #发送的用户位于$1的字符串
+        local PartyID=2            #第一步看的通讯录中的部门ID
+        local Msg=$(echo "$@" | cut -d" " -f3-)
+        printf '{\n'
+        printf '\t"touser": "'"$UserID"\"",\n"
+        printf '\t"toparty": "'"$PartyID"\"",\n"
+        printf '\t"msgtype": "text",\n'
+        printf '\t"agentid": "'"$agentid"\"",\n"
+        printf '\t"text": {\n'
+        printf '\t\t"content": "'"$Msg"\""\n"
+        printf '\t},\n'
+        printf '\t"safe":"0"\n'
+        printf '}\n'
+}
+/usr/bin/curl --data-ascii "$(body $1 $2 $3)" $PURL
+企业ID
+ww496d47cc707b7239
+AgentId
+1000003
+Secret
+ebxky-GfkJKXl_oOeKQ2zdw_P2lKLUYoRZ5g6FM0l24
+
+
+{ITEM.NAME}故障
+IP:{HOST.HOST}
+故障信息:{TRIGGER.NAME}
+监控取值:{ITEM.LASTVALUE}
+告警时间:{EVENT.DATE} {EVENT.TIME}
+
+
+主机:{HOST.NAME}故障
+地址:{HOSTNAME1}
+功能模块:{ITEM.NAME}
+监控取值:{ITEM.LASTVALUE}
+告警信息:{TRIGGER.NAME}
+告警时间:{EVENT.DATE} {EVENT.TIME}
+
+
+#!/bin/bash
+CorpID="ww496d47cc707b7239"                   #企业下面的CorpID
+Secret="ebxky-GfkJKXl_oOeKQ2zdw_P2lKLUYoRZ5g6FM0l24"            #创建的应用那有Secret
+GURL="https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$CorpID&amp;corpsecret=$Secret"
+Token=$(/usr/bin/curl -s -G $GURL |awk -F\": '{print $4}'|awk -F\" '{print $2}')
+#echo $Token
+PURL="https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=$Token"
+
+function body(){
+        local int agentid=1000003   #改为AgentId 在创建的应用那里看
+        local UserID=$1             #发送的用户位于$1的字符串
+        local PartyID=2            #第一步看的通讯录中的部门ID
+        local Msg=$(echo "$@" | cut -d" " -f3-)
+        printf '{\n'
+        printf '\t"touser": "'"$UserID"\"",\n"
+        printf '\t"toparty": "'"$PartyID"\"",\n"
+        printf '\t"msgtype": "text",\n'
+        printf '\t"agentid": "'"$agentid"\"",\n"
+        printf '\t"text": {\n'
+        printf '\t\t"content": "'"$Msg"\""\n"
+        printf '\t},\n'
+        printf '\t"safe":"0"\n'
+        printf '}\n'
+}
+/usr/bin/curl --data-ascii "$(body $1 $2 $3)" $PURL</pre>
+</div>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -5624,7 +5740,89 @@ curl -u elastic:thcl12 -X PUT "192.168.102.81:9200/_snapshot/backup/test?wait_fo
 <pre>curl -u elastic:RKSVd3aLHzWOYvwrqwFk -XDELETE http://192.168.102.12:9200/device_binding/_doc/1</pre>
 </div>
 </div>
-<div style="page-break-after: always;"></div>
+<div class="listingblock">
+<div class="title">清理数据后释放磁盘空间</div>
+<div class="content">
+<pre>curl -XPOST 'http://192.168.1.1:9200/index/_forcemerge?only_expunge_deletes=true&amp;max_num_segments=1'</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+max_num_segments : 期望merge到多少个segments，1的意思是强行merge到1个segment<br>
+only_expunge_deletes : 只做清理有deleted的segments，即瘦身<br>
+flush : 清理完执行一下flush，默认是true
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_kibana">14.3. Kibana</h3>
+<div class="sect3">
+<h4 id="_安装_4">14.3.1. 安装</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dnf --disablerepo="*" --enablerepo="elasticsearch" install -y kibana</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_配置">14.3.2. 配置</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sed -i '7s/#server.host: "localhost"/server.host: "172.24.45.170"/' /etc/kibana/kibana.yml
+sed -i '28s/#elasticsearch.hosts: .*/elasticsearch.hosts: ["http:\/\/172.24.45.170:9200"]/' /etc/kibana/kibana.yml
+sed -i '115s/#i18n.locale: "en"/i18n.locale: "en"/' /etc/kibana/kibana.yml
+sed -i 's/#elasticsearch.username: "kibana_system"/elasticsearch.username: "kibana_system"/' /etc/kibana/kibana.yml
+sed -i 's/#elasticsearch.password: "pass"/elasticsearch.password: "elasticsearch_password"/' /etc/kibana/kibana.yml</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>如果Elasticsearch的 <code>"network.host"</code> 参数值为具体的IP地址，比如 <code>"172.24.45.170"</code>。</p>
+</div>
+<div class="paragraph">
+<p>那么，Kibana中的 <code>"elasticsearch.hosts"</code> 同样需要设置为 <code>"172.24.45.170"</code>，而不能使用 <code>"0.0.0.0"</code>。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_开机启动">14.3.3. 开机启动</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">systemctl enable kibana</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_启动服务_2">14.3.4. 启动服务</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">systemctl start kibana</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_最后">14.3.5. 最后</h4>
+<div class="paragraph">
+<p>如果系统IP为 172.24.45.170，则访问 <a href="http://172.24.45.170:5601/" class="bare">http://172.24.45.170:5601/</a>
+&lt;&lt;&lt;</p>
+</div>
 </div>
 </div>
 </div>
@@ -5635,7 +5833,7 @@ curl -u elastic:thcl12 -X PUT "192.168.102.81:9200/_snapshot/backup/test?wait_fo
 <div class="sect2">
 <h3 id="_mongodb">15.1. MongoDB</h3>
 <div class="sect3">
-<h4 id="_安装_4">15.1.1. 安装</h4>
+<h4 id="_安装_5">15.1.1. 安装</h4>
 
 </div>
 <div class="sect3">
@@ -5804,6 +6002,146 @@ $first :: 根据文档的排序获取第一个文档数据
 $last ::  获取最后一个数据</pre>
 </div>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_主从">15.2. 主从</h3>
+<div class="sect3">
+<h4 id="_配置_2">15.2.1. 配置</h4>
+<div class="listingblock">
+<div class="title">修改配置文件</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &lt;&lt; EOF &gt;/etc/mongo.conf
+# mongod.conf
+
+# for documentation of all options, see:
+#   http://docs.mongodb.org/manual/reference/configuration-options/
+
+wiredTiger:
+    engineConfig:
+      configString : cache_size=512M
+# where to write logging data.
+systemLog:
+  destination: file
+  logAppend: true
+  path: /var/log/mongodb/mongod.log
+
+# Where and how to store data.
+storage:
+  dbPath: /data/mongo
+  journal:
+    enabled: true
+  directoryPerDB: true
+  wiredTiger:
+     engineConfig:
+        cacheSizeGB: 8                    #如果一台机器启动一个实例这个可以注释选择默认，如果一台机器启动多个实例，需要设置内存大小，避免互相抢占内存
+        directoryForIndexes: true
+#  engine:
+#  wiredTiger:
+
+# how the process runs
+processManagement:
+  fork: true  # fork and run in background
+  pidFilePath: /var/run/mongodb/mongod.pid  # location of pidfile
+  timeZoneInfo: /usr/share/zoneinfo
+
+# network interfaces
+net:
+  port: 27017
+  bindIp: 0.0.0.0  # Enter 0.0.0.0,:: to bind to all IPv4 and IPv6 addresses or, alternatively, use the net.bindIpAll setting.
+  maxIncomingConnections: 5000
+
+#security:
+
+#operationProfiling:
+
+#replication:
+replication:
+  replSetName: rs0
+
+#sharding:
+
+## Enterprise-Only Options
+
+#auditLog:
+
+#snmp:
+security:
+  authorization: enabled  #开启访问控制
+  keyFile: /data/mongo/mongo.key #集群实现安全通信。作为所有mongod后台进程允许加入集群的凭证, 所有集群中的节点共用一个keyFile, 避免其他mongod非法加入集群。
+EOF</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">在主节点生成keyfile文件,配置添加路径，移动到mongo目录，修改文件用户组，权限为600</div>
+<div class="content">
+<pre>openssl rand -base64 741 &gt; mongo.key
+chown mongod:mongod mongo.key
+chmod 600 mongo.key
+mv mongo.key /data/mongo</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">复制到主从机器</div>
+<div class="content">
+<pre>scp -P port mongo.key root@host:/src</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">配置文件修改完成，重启mongo</div>
+<div class="content">
+<pre>systemctl restart mongod</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">登陆mongo,输入配置变量</div>
+<div class="content">
+<pre>config_myset={_id:'rs0',members:[{_id:0,host:'118.116.4.131:27017'},{_id:1,host:'118.123.245.177:27017'}]};
+rs.initiate(config_myset)
+rs.state()
+rs.isMaster()</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">创建用户</div>
+<div class="content">
+<pre>use admin
+db.createUser(
+  {
+    user: "root",
+    pwd: "4MIJ6Axurmc9ns0Pt0Pr",
+    roles: [ "root"]
+  }
+)</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">从库添加查看权限,从库执行</div>
+<div class="content">
+<pre>use admin
+db.auth("name","passwd")     #主库的用户密码
+rs.secondaryOk();
+rs.slaveOK();</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">新增slave节点,上传access.key,并赋予权限，属主，600 在master节点操作</div>
+<div class="content">
+<pre>mongo
+use admin
+db.auth("root","123456")
+rs.add("ip:port")</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">从库执行</div>
+<div class="content">
+<pre>use admin
+db.auth("name","passwd")
+rs.secondaryOk();
+rs.slaveOK();</pre>
+</div>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -5815,7 +6153,7 @@ $last ::  获取最后一个数据</pre>
 <div class="sect2">
 <h3 id="_nginx">16.1. Nginx</h3>
 <div class="sect3">
-<h4 id="_安装_5">16.1.1. 安装</h4>
+<h4 id="_安装_6">16.1.1. 安装</h4>
 <div class="listingblock">
 <div class="title">添加源</div>
 <div class="content">
@@ -5888,7 +6226,7 @@ server{
 <div class="sect2">
 <h3 id="_iptables">17.1. `Iptables</h3>
 <div class="sect3">
-<h4 id="_安装_6">17.1.1. 安装</h4>
+<h4 id="_安装_7">17.1.1. 安装</h4>
 <div class="listingblock">
 <div class="content">
 <pre>yum install -y iptables-services</pre>
@@ -6005,7 +6343,7 @@ server{
 <div class="listingblock">
 <div class="title">删除对应链的规则</div>
 <div class="content">
-<pre>iptables -D OUTPUT 1</pre>
+<pre>iptables -D INPUT 1</pre>
 </div>
 </div>
 <div class="listingblock">
@@ -6023,7 +6361,7 @@ server{
 <div class="listingblock">
 <div class="title">默认的可以出去</div>
 <div class="content">
-<pre>iptables -P OUTPUT ACCEPT</pre>
+<pre>iptables -P INPUT ACCEPT</pre>
 </div>
 </div>
 <div class="listingblock">
@@ -6167,42 +6505,36 @@ cat /etc/sysconfig/iptables</code></pre>
 <div class="listingblock">
 <div class="title">禁用SELINUX，必须重启才能生效</div>
 <div class="content">
-<pre>echo SELINUX=disabled&gt;/etc/selinux/config</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>echo SELINUXTYPE=targeted&gt;&gt;/etc/selinux/config</pre>
+<pre>echo SELINUX=disabled&gt;/etc/selinux/config
+
+echo SELINUXTYPE=targeted&gt;&gt;/etc/selinux/config</pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">bz2文件解压</div>
 <div class="content">
-<pre>yum install bzip2` +</pre>
+<pre>yum install bzip2
+
+bzip2 -d name.bz2</pre>
 </div>
-</div>
-<div class="paragraph">
-<p>bzip2 -d name.bz2</p>
 </div>
 <div class="listingblock">
+<div class="title">更新动态链接库</div>
 <div class="content">
-<pre>.更新动态链接库</pre>
+<pre>ldconfig</pre>
 </div>
-</div>
-<div class="paragraph">
-<p>ldconfig</p>
 </div>
 <div class="listingblock">
+<div class="title">service服务增加文件限制</div>
 <div class="content">
-<pre>.service服务增加文件限制</pre>
+<pre>LimitNOFILE=65535</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>LimitNOFILE=65535`
-=== shell</p>
 </div>
+<div class="sect2">
+<h3 id="_shell">19.2. shell</h3>
 <div class="sect3">
-<h4 id="_变量">19.1.1. 变量</h4>
+<h4 id="_变量">19.2.1. 变量</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">your_name="qinjx"
@@ -6232,7 +6564,7 @@ EOF</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_传参">19.1.2. 传参</h4>
+<h4 id="_传参">19.2.2. 传参</h4>
 <div class="dlist">
 <div class="title">参数解释</div>
 <dl>
@@ -6284,7 +6616,7 @@ EOF</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_运算符">19.1.3. 运算符</h4>
+<h4 id="_运算符">19.2.3. 运算符</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">-eq	检测两个数是否相等，相等返回 true。	                [ $a -eq $b ] 返回 false。
@@ -6314,7 +6646,7 @@ EOF</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_vim">19.1.4. vim</h4>
+<h4 id="_vim">19.2.4. vim</h4>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">0 或功能键[Home]</dt>
@@ -6374,11 +6706,11 @@ EOF</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_systemctl">19.1.5. Systemctl</h4>
+<h4 id="_systemctl">19.2.5. Systemctl</h4>
 
 </div>
 <div class="sect3">
-<h4 id="_systemctl_参数">19.1.6. <code>systemctl</code> 参数</h4>
+<h4 id="_systemctl_参数">19.2.6. <code>systemctl</code> 参数</h4>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">list-units</dt>
@@ -6433,7 +6765,7 @@ EOF</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_配置_service">19.1.7. 配置 <code>.service</code></h4>
+<h4 id="_配置_service">19.2.7. 配置 <code>.service</code></h4>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Description=</dt>
@@ -6456,7 +6788,7 @@ EOF</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_配置_timer">19.1.8. 配置 <code>.timer</code></h4>
+<h4 id="_配置_timer">19.2.8. 配置 <code>.timer</code></h4>
 <div class="listingblock">
 <div class="title">service.timer</div>
 <div class="content">
@@ -6516,7 +6848,7 @@ years, year, y
 </div>
 </div>
 <div class="sect3">
-<h4 id="_ulimit">19.1.9. Ulimit</h4>
+<h4 id="_ulimit">19.2.9. Ulimit</h4>
 <div class="paragraph">
 <p>ulimit 用于限制启动进程所占用的资源</p>
 </div>
@@ -6728,7 +7060,7 @@ kafka-reassign-partitions.sh --zookeeper node01:2181 node02:2181 node03:2181  --
 </div>
 </div>
 <div class="sect4">
-<h5 id="_配置">配置</h5>
+<h5 id="_配置_3">配置</h5>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
