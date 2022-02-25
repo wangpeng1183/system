@@ -1082,6 +1082,17 @@ p { margin-bottom: 1.25rem; }
 </li>
 </ul>
 </li>
+<li><a href="#_Ceph_chapter">22. Ceph</a>
+<ul class="sectlevel2">
+<li><a href="#_ceph">22.1. Ceph</a>
+<ul class="sectlevel3">
+<li><a href="#_安装_8">22.1.1. 安装</a></li>
+<li><a href="#_配置_4">22.1.2. 配置</a></li>
+<li><a href="#_osd节点宕机重新加入集群">22.1.3. osd节点宕机重新加入集群</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -1399,6 +1410,20 @@ function body(){
 }
 /usr/bin/curl --data-ascii "$(body $1 $2 $3)" $PURL</pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+用阿里云搭建zabbix用25端口发邮件超时问题<br>
+刚才并不清楚原因，首先服务器Telnet smtp.exmail.qq.com 25端口，发现25端口不通，肯定会发生连接超时。<br>
+查询原因是阿里云管控垃圾邮件，封了25端口服务，可以使用ssl方式的465端口进行邮件的发送。
+</td>
+</tr>
+</table>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -5085,7 +5110,14 @@ EOF</code></pre>
 
 [test]
 10.23.101.x
-10.23.101.x</code></pre>
+10.23.101.x
+
+[ss]
+192.168.102.12 ansible_ssh_user=tt ansible_ssh_port=28529
+[ss:vars]
+ansible_ssh_user=tt
+ansible_ssh_pass=thcl@123      #tt用户
+ansible_become_pass=thcl@123   #root用户</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -5105,13 +5137,32 @@ EOF</code></pre>
 <div class="sect2">
 <h3 id="_ansible常用模块">13.4. ansible常用模块</h3>
 <div class="listingblock">
-<div class="title">command</div>
+<div class="title">配置文件 /etc/ansible/hosts</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">    #  连接目标主机的地址
+    ansible_ssh_host
+    #  连接目标主机的端口，默认 22 时无需指定
+    ansible_ssh_port
+    #  连接目标主机默认用户
+    ansible_ssh_user
+    #  连接目标主机默认用户密码
+    ansible_ssh_pass
+    #  目标主机连接类型，可以是 local 、ssh 或 paramiko
+    ansible_ssh_connection
+    #  连接目标主机的 ssh 私钥
+    ansible_ssh_private_key_file
+    #  指定采用非 Python 的其他脚本语言，如 Ruby 、Perl 或其他类似 ansible_python_interpreter 解释器
+    ansible_*_interpreter</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">命令使用 command</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ansible hostname -m command -a "free -m"</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<div class="title">script</div>
+<div class="title">远程执行本地脚本script</div>
 <p>script的功能是在远程主机执行主控端存储的 shell 脚本文件，相当于 scp + shell 组合。</p>
 </div>
 <div class="listingblock">
@@ -5134,6 +5185,14 @@ EOF</code></pre>
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ansible hostname -m copy -a "src=/home/test.sh dest=/tmp/ owner=root group=root mode=0755"</code></pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="title">远程主机系统服务管理</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ansible Client -m service -a "name=nginx state=stoped"
+ansible Client -m service -a "name=nginx state=restarted"
+ansible Client -m service -a "name=nginx state=reloaded"</code></pre>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_ansible_playbook">13.5. ansible-playbook</h3>
@@ -5145,18 +5204,14 @@ EOF</code></pre>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[root@localhost ~]# cat /etc/ansible/hellow.yml
 ---
+- hosts: ss
+  remote_user: tt   #tt 用户登陆
+  become: yes       #使用 root权限
+  become_method: su  #使用 root权限
 
-- name: say 'hello world'
-  hosts: test
   tasks:
-
-    - name: echo 'hello world'
-      command: echo 'hello world'
-      register: result
-
-    - name: print stdout
-      debug:
-        msg: ""</code></pre>
+  - name: touch aa.txt
+    shell: touch /root/aa.txt</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -6530,6 +6585,34 @@ bzip2 -d name.bz2</pre>
 <pre>LimitNOFILE=65535</pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="title">清理僵尸进程</div>
+<div class="content">
+<pre>ps -e -o stat,ppid,pid,cmd|egrep '^[Zz]'
+
+kill -9 pid</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+  '<sup>[Zz]'：这是正则表达式，</sup>表示第一个字符的位置，[Zz]，表示z或者大写的Z字母，即表示第一个字符为Z或者z开头的进程数据，这样是因为僵尸进程的状态信息以Z或者z字母开头。
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">监听文件变化</div>
+<div class="content">
+<pre>yum install inotify-tools
+
+inotifywait -rme modify,attrib,move,create,delete,delete_self /root/test/ --format "%Xe %w%f"</pre>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_shell">19.2. shell</h3>
@@ -7067,10 +7150,263 @@ kafka-reassign-partitions.sh --zookeeper node01:2181 node02:2181 node03:2181  --
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_Ceph_chapter">22. Ceph</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_ceph">22.1. Ceph</h3>
+<div class="sect3">
+<h4 id="_安装_8">22.1.1. 安装</h4>
+<div class="listingblock">
+<div class="title">配置基础yum源</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">yum clean all
+rm -rf /etc/yum.repos.d/*.repo
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+sed -i '/aliyuncs/d' /etc/yum.repos.d/CentOS-Base.repo
+sed -i '/aliyuncs/d' /etc/yum.repos.d/epel.repo</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">配置ceph源</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &gt;&gt; /etc/hosts &lt;&lt; EOF
+[ceph]
+name=ceph
+baseurl=http://mirrors.aliyun.com/ceph/rpm-jewel/el7/x86_64/
+gpgcheck=0
+priority =1
+[ceph-noarch]
+name=cephnoarch
+baseurl=http://mirrors.aliyun.com/ceph/rpm-jewel/el7/noarch/
+gpgcheck=0
+priority =1
+[ceph-source]
+name=Ceph source packages
+baseurl=http://mirrors.aliyun.com/ceph/rpm-jewel/el7/SRPMS
+gpgcheck=0
+priority=1
+EOF</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">更新源</div>
+<div class="content">
+<pre>yum clean all &amp;&amp; yum makecache</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">安装Ceph</div>
+<div class="content">
+<pre>yum install ceph -y</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">安装主节点 ceph-deploy</div>
+<div class="content">
+<pre>yum install ceph-deploy -y</pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="title">三个节点都部署mon</div>
+<p>ceph-deploy new node1 node2 node3</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_配置_4">22.1.2. 配置</h4>
+<div class="listingblock">
+<div class="title">增加以下内容到 /root/cluster/ceph.conf</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">public_network=192.168.102.0/24
+osd_pool_default_size = 2
+mon_pg_warn_max_per_osd=20000</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">配置初始 monitor(s)、并收集所有密钥</div>
+<div class="content">
+<pre>ceph-deploy mon create-initial</pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="title">把配置文件和 admin 密钥拷贝到管理节点和 Ceph 节点</div>
+<p>ceph-deploy admin node1 node2 node3</p>
+</div>
+<div class="listingblock">
+<div class="title">查看ceph状态</div>
+<div class="content">
+<pre>ceph -s</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+各主机添加一块硬盘用以挂载
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">node1</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkfs.xfs /dev/sdb
+
+mkdir -p /var/local/osd0
+
+mount /dev/sdb /var/local/osd0/</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">node2</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkfs.xfs /dev/sdb
+
+mkdir -p /var/local/osd1
+
+mount /dev/sdb /var/local/osd1/</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">node3</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkfs.xfs /dev/sdb
+
+mkdir -p /var/local/osd2
+
+mount /dev/sdb /var/local/osd2/</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">创建osd</div>
+<div class="content">
+<pre>ceph-deploy osd prepare node1:/var/local/osd0 node2:/var/local/osd1 node3:/var/local/osd2</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">激活osd</div>
+<div class="content">
+<pre>ceph-deploy osd activate node1:/var/local/osd0 node2:/var/local/osd1 node3:/var/local/osd2</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">查看状态</div>
+<div class="content">
+<pre>ceph-deploy osd list node1 node2 node3</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>各节点修改ceph.client.admin.keyring权限</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>chmod +r /etc/ceph/ceph.client.admin.keyring</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">部署mds</div>
+<div class="content">
+<pre>ceph-deploy mds create node1 node2 node3</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">查看状态</div>
+<div class="content">
+<pre>ceph mds stat</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">设置存储池                        PG</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ceph osd pool create cephfs_data 128
+
+ceph osd pool create cephfs_metadata 128
+
+ceph fs new cephfs cephfs_metadata cephfs_data
+
+ceph mon stat</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">创建挂载目录</div>
+<div class="content">
+<pre>mkdir /ceph/cephfs -pv</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">挂载启用 cephx 认证的 Ceph 文件系统，你必须指定用户名、密钥（共享目录，全部节点挂载）</div>
+<div class="content">
+<pre>mount -t ceph node1:6789,node2:6789,node3:6789:/ /ceph/cephfs -o name=admin,secret=AQBcVANiuORJDBAAkrK9yHFtDGQlAlaZ/ycc1g==</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">卸载</div>
+<div class="content">
+<pre>umount /ceph/cephfs</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">ceph-fuse客户端挂载</div>
+<div class="content">
+<pre>yum -y install ceph-fuse
+
+ceph-fuse -m node1:6789,node2:6789,node3:6789 /ceph/cephfs/</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_osd节点宕机重新加入集群">22.1.3. osd节点宕机重新加入集群</h4>
+<div class="listingblock">
+<div class="title">设置osd状态为out</div>
+<div class="content">
+<pre>ceph osd out osd.0</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">从集群中删除</div>
+<div class="content">
+<pre>ceph osd rm 0</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">从crush中删除</div>
+<div class="content">
+<pre>ceph osd crush remove osd.0</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">清理认证信息</div>
+<div class="content">
+<pre>ceph auth del osd.0
+
+ceph osd rm 0</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">卸载磁盘</div>
+<div class="content">
+<pre>umount /var/local/osd0</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">清理磁盘</div>
+<div class="content">
+<pre>rm -rf /var/local/osd0/*</pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-12-01 15:59:02 +0800
+Last updated 2022-02-25 13:52:38 +0800
 </div>
 </div>
 <script src="js/highlight.min.js"></script>
