@@ -65,7 +65,7 @@ yum install -y bash-completion
 
 
 #设置阿里源
-wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
 #生成缓存
 yum makecache 
 
